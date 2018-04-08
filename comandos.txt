@@ -1,0 +1,64 @@
+RESUMÃO COMANDOS {
+
+ Roda MongoDB: "c:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --dbpath "d:\data\db"
+
+ Roda Client MongoDB: "c:\Program Files\MongoDB\Server\3.6\bin\mongo.exe"
+
+ Limpa bibSisDB: use bibSisDB,
+ 		db.getCollectionNames().forEach(collection => db[collection].drop())
+
+ Popula DB: cd "c:\workspace\bibSis\scripts",
+ 		node popularDB
+
+ Roda API: cd "c:\workspace\bibSis\",
+  	npm run start
+
+ Roda Front-End: cd "c:\workspace\bibSis\web",
+ 		polymer serve --open
+
+ Baixa Dependências Back-End: cd "c:\workspace\bibSis\",
+ 		npm install
+
+ Baixa Dependências Front-End: cd "c:\workspace\bibSis\web",
+ 		bower install
+}
+
+
+SET UP DO PROJETO {
+
+	- download nodejs e npm: https://nodejs.org/en/download/
+
+	MONGODB {
+		- download MongoDB: https://www.mongodb.com/download-center#community
+		- quando vai instalar o mongodb ele oferece também pra instalar o MongoDB compass, que é um programa
+		tipo navicat, phpmyadmin, etc
+		- pra rodar o banco, vc tem q criar uma pastar \data\db no lugar que voc� quer que o banco esteja (no meu
+		caso eu escolhi "d:\data\db") e executar o comando:
+		"%diretório do MongoDB%\Server\3.6\bin\mongod.exe" --dbpath "%diretório que tem as pastas \data\db%"
+	}
+
+	RODANDO A API {
+		- abra um cmd, vá até a pasta do projeto, e execute o comando npm install (espera-se q ele instale as dependências do projeto)
+
+		- se tudo estiver certinho, só rodar a API com o comando npm run start
+
+		extra: fiz um script pra popular a database, pra rodar é só ir até a pasta "script" dentro do projeto via cmd,
+		e executar o script q tá lá com o comando node popularDB (popularDB.js é o arquivo com os comandos do script),
+		ele termina rapidinho mas n sai, daí tem que apertar ctrl+c pra ele parar
+
+		extra2: para deletar todos os documentos das collections do database, eu executo o "mongo.exe" (fica na mesma pasta que o mongod.exe)
+		- daí no shell executa os comandos:
+			- use bibSisDB (no caso eu dei esse nome pra database)
+			- db.getCollectionNames().forEach(collection => db[collection].drop())
+			- como pode perceber, no shel do mongo vc usa javascript mesmo
+	}
+
+	FRONT-END {
+		- rode o comando npm install -g polymer-cli (acho que tem q executar o cmd como administrador)
+		- rode o comando npm install -g bower
+		- entre na pasta bibSis/web
+		- rode o comando bower install (esse comando instala todas as dependências do projeto, sempre quando alguém adicionar um novo componente,
+		esse novo componente é colocado no arquivo bower.json para que seja instalado no comando bower install)
+		- com tudo instalado, pra rodar é: polymer serve --open (--open faz com que depois de rodar abra a url no navegador)
+	}
+}

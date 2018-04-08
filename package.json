@@ -1,0 +1,31 @@
+{
+  "name": "bibSis",
+  "version": "1.0.0",
+  "description": "Trabalho da disciplina Projeto Multidisciplinar do curso de Engenharia de Sistemas",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tariklemos/bibSis.git"
+  },
+  "keywords": [
+    "API"
+  ],
+  "author": "André Lopes, Carlos Joviano, Silvana Ribeiro, Tarik Porto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tariklemos/bibSis/issues"
+  },
+  "homepage": "https://github.com/tariklemos/bibSis",
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.13"
+  }
+}
