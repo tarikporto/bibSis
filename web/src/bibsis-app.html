@@ -24,6 +24,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="lazy-import" href="my-view1.html">
 <link rel="lazy-import" href="my-view2.html">
+<link rel="lazy-import" href="bibsis-home.html">
 <link rel="lazy-import" href="my-view404.html">
 
 <dom-module id="bibsis-app">
@@ -86,6 +87,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
           <a name="view1" href="[[rootPath]]view1">View One</a>
           <a name="view2" href="[[rootPath]]view2">View Two</a>
+          <a name="home" href="[[rootPath]]home">Home</a>
         </iron-selector>
       </app-drawer>
 
@@ -105,6 +107,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             fallback-selection="view404"
             role="main">
           <my-view1 name="view1"></my-view1>
+          <bibsis-home name="home"></bibsis-home>
           <my-view2 name="view2"></my-view2>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
@@ -129,7 +132,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           },
           routeData: Object,
           subroute: Object,
-          // This shouldn't be neccessary, but the Analyzer isn't picking up
+          // This shouldn't be neccessary,T but the Analyzer isn't picking up
           // Polymer.Element#rootPath
           rootPath: String,
         };
@@ -154,7 +157,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _pageChanged(page) {
         // Load page import on demand. Show 404 page if fails
-        const resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
+        const resolvedPageUrl = this.resolveUrl('bibsis-' + page + '.html');
         Polymer.importHref(
             resolvedPageUrl,
             null,

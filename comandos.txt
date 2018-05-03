@@ -1,6 +1,6 @@
 RESUMÃO COMANDOS {
 
- Roda MongoDB: "c:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --dbpath "d:\data\db"
+ Roda MongoDB: "c:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --dbpath "c:\data\db"
 
  Roda Client MongoDB: "c:\Program Files\MongoDB\Server\3.6\bin\mongo.exe"
 
@@ -32,7 +32,7 @@ SET UP DO PROJETO {
 		- download MongoDB: https://www.mongodb.com/download-center#community
 		- quando vai instalar o mongodb ele oferece também pra instalar o MongoDB compass, que é um programa
 		tipo navicat, phpmyadmin, etc
-		- pra rodar o banco, vc tem q criar uma pastar \data\db no lugar que voc� quer que o banco esteja (no meu
+		- pra rodar o banco, vc tem q criar uma pasta \data\db no lugar que voc� quer que o banco esteja (no meu
 		caso eu escolhi "d:\data\db") e executar o comando:
 		"%diretório do MongoDB%\Server\3.6\bin\mongod.exe" --dbpath "%diretório que tem as pastas \data\db%"
 	}
@@ -50,7 +50,7 @@ SET UP DO PROJETO {
 		- daí no shell executa os comandos:
 			- use bibSisDB (no caso eu dei esse nome pra database)
 			- db.getCollectionNames().forEach(collection => db[collection].drop())
-			- como pode perceber, no shel do mongo vc usa javascript mesmo
+			- como pode perceber, no shell do mongo vc usa javascript mesmo
 	}
 
 	FRONT-END {
