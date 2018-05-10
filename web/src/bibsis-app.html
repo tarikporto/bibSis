@@ -29,11 +29,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="lazy-import" href="my-view404.html">
 <link rel="import" href="shared-styles.html">
 
-<link rel="import" href="../../classical/classical.html">
-
 <dom-module id="bibsis-app">
-    <link rel="import" href="../../classical/classical.css" type="css">
   <template>
+    <style>
+      app-header {
+        background-color: var(--paper-toolbar-background);
+        color: #ffffff;
+      }
+    </style>
+
     <app-location
         route="{{route}}"
         url-space-regex="^[[rootPath]]">
@@ -46,7 +50,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         tail="{{subroute}}">
     </app-route>
 
-    <app-drawer-layout fullbleed narrow="{{narrow}}">
+    <app-drawer-layout fullbleed narrow="{{narrow}}" force-narrow>
       <!-- Drawer content -->
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
         <app-toolbar>Menu</app-toolbar>
