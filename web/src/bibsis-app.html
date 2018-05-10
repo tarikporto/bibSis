@@ -23,9 +23,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="bibsis-icons.html">
 
 <link rel="lazy-import" href="my-view1.html">
+<link rel="lazy-import" href="bibsis-materia.html">
 <link rel="lazy-import" href="my-view2.html">
 <link rel="lazy-import" href="bibsis-home.html">
 <link rel="lazy-import" href="my-view404.html">
+<link rel="import" href="shared-styles.html">
 
 <dom-module id="bibsis-app">
   <template>
@@ -56,6 +58,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <a name="view1" href="[[rootPath]]view1">View One</a>
           <a name="view2" href="[[rootPath]]view2">View Two</a>
           <a name="home" href="[[rootPath]]home">Home</a>
+          <a name="materia" href="[[rootPath]]materia">Matéria</a>
         </iron-selector>
       </app-drawer>
 
@@ -76,6 +79,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             role="main">
           <my-view1 name="view1"></my-view1>
           <bibsis-home name="home"></bibsis-home>
+          <bibsis-materia name="materia"></bibsis-materia>
           <my-view2 name="view2"></my-view2>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
