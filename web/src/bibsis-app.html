@@ -75,13 +75,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <iron-pages
             selected="[[page]]"
             attr-for-selected="name"
-            fallback-selection="view404"
+            fallback-selection="404"
             role="main">
-          <my-view1 name="view1"></my-view1>
           <bibsis-home name="home"></bibsis-home>
           <bibsis-materia name="materia"></bibsis-materia>
-          <my-view2 name="view2"></my-view2>
-          <my-view404 name="view404"></my-view404>
+          <bibsis-404 name="404"></bibsis-404>
         </iron-pages>
       </app-header-layout>
     </app-drawer-layout>
@@ -119,7 +117,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _routePageChanged(page) {
         // If no page was found in the route data, page will be an empty string.
         // Default to 'view1' in that case.
-        this.page = page || 'view1';
+        this.page = page || 'home';
 
         // Close a non-persistent drawer when the page & route are changed.
         if (!this.$.drawer.persistent) {
@@ -138,7 +136,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       _showPage404() {
-        this.page = 'view404';
+        this.page = '404';
       }
     }
 
