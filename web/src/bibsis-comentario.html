@@ -7,19 +7,22 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-
+<link rel="import" href="../bower_components/neon-animation/web-animations.html">
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
 <link rel="import" href="../custom_components/card-comentario/card-comentario.html">
 <link rel="import" href="shared-styles.html">
 
-<dom-module id="bibsis-materia">
+<dom-module id="bibsis-comentario">
   <template>
     <style include="shared-styles" is="custom-style">
       :host {
         display: block;
-
         padding: 10px;
       }
 
@@ -29,52 +32,44 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         width: 40px;
         padding: 1px;
       }
-
-      .card {
-        margin: 24px;
-        padding: 16px;
-        color: #757575;
-        border-radius: 5px;
-        background-color: #fff;
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-        min-height: 200px;
+      paper-dropdown-menu, paper-listbox {
+        width: 350px;
       }
+      paper-dropdown-menu {
+        height: 200px;
+      }
+
     </style>
 
-    <div class="card" style="width:50%;float:left">
+    <div class="card">
       <div>
-        <div style="width:50%;float:left">
-          <h1>Nome da Matéria</h1>
+        <h1>Adicionar comentário à Disciplina</h1>
+        <paper-dropdown-menu label="Disciplina">
+          <paper-listbox slot="dropdown-content">
+            <paper-item>Disciplina 1</paper-item>
+            <paper-item>Disciplina 2</paper-item>
+            <paper-item>Disciplina 3</paper-item>
+            <paper-item>Disciplina 4</paper-item>
+          </paper-listbox>
+        </paper-dropdown-menu>
+        <br>
+        Professor:<iron-autogrow-textarea></iron-autogrow-textarea><br><br>
+        <div style="float:left;">
+          Avaliação:
         </div>
-        <div style="margin-left:56%;padding-top:15px;">
+        <div style="margin-left:10;">
           <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
           <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
           <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
           <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
           <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
         </div>
-        <card-comentario title="Comentário 1" rate="2" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
-          Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
-          nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
-        <card-comentario title="Comentário 2" rate="4" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
-          Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
-          nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
-        <card-comentario title="Comentário 3" rate="1" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
-          Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
-          nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
-        <card-comentario title="Comentário 4" rate="5" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
-          Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
-          nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
-      </div>
 
-    </div>
-    <div class="card" style="margin-left:56%;width:40%;height:100%; padding:15px;">
-      <h1>Materiais</h1>
       <div><paper-icon-button icon="bibsis-icons-materia:noticia"></paper-icon-button>Notícia 1</div>
       <div><paper-icon-button icon="bibsis-icons-materia:artigo"></paper-icon-button>Artigo 1</div>
       <div><paper-icon-button icon="bibsis-icons-materia:imagem"></paper-icon-button>Imagem 1</div>
       <div><paper-icon-button icon="bibsis-icons-materia:audio"></paper-icon-button>Áudio 1</div>
-        <div><paper-icon-button icon="bibsis-icons-materia:video"></paper-icon-button>Vídeo 1</div>
+      <div><paper-icon-button icon="bibsis-icons-materia:video"></paper-icon-button>Vídeo 1</div>
       <div><paper-icon-button icon="bibsis-icons-materia:webpage"></paper-icon-button>Link 1</div>
       <div><paper-icon-button icon="bibsis-icons-materia:livro"></paper-icon-button>Livro 1</div>
     </div>
@@ -82,8 +77,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   <script>
-    class BibsisMateria extends Polymer.Element {
-      static get is() { return 'bibsis-materia'; }
+    class BibsisComentario extends Polymer.Element {
+      static get is() { return 'bibsis-comentario'; }
 
       static get properties() {
         return {
@@ -98,6 +93,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     }
 
-    window.customElements.define(BibsisMateria.is, BibsisMateria);
+    window.customElements.define(BibsisComentario.is, BibsisComentario);
   </script>
 </dom-module>
