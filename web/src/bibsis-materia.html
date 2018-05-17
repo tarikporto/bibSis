@@ -11,6 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../custom_components/card-comentario/card-comentario.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="bibsis-materia">
@@ -21,7 +22,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         padding: 10px;
       }
-      
+
       .my-button {
         color: var(--paper-yellow-500);
         height: 40px;
@@ -44,60 +45,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <div>
         <h1>Nome da Matéria</h1>
 
-        <div class="card" style="height:200px;">
-          <div>
-            <div style="float:left">
-              <h3>Comentário 1</h3>
-            </div>
-            <div style="margin-left: 200px; margin-bottom:10px; padding-top:15px">
-              <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-              <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-              <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-              <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
-              <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
-            </div>
-          </div>
-          <div><h5>Autor - Semestre</h5></div>
-          <div style="font-size: 11px;">Ut labores minimum atomorum pro. Laudem tibique ut has.
-            Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.
-          </div>
-        </div>
-        <div class="card">
-          <div>
-            <div style="float:left">
-              <h3>Comentário 2</h3>
-            </div>
-            <div style="margin-left: 200px; margin-bottom:10px; padding-top:15px">
-              <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-              <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-              <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-              <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
-              <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
-            </div>
-          </div>
-          <div><h5>Autor - Semestre</h5></div>
-          <div style="font-size: 11px;">Ut labores minimum atomorum pro. Laudem tibique ut has.
-            Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.
-          </div>
-        </div>
-        <div class="card">
-          <div>
-            <div style="float:left">
-              <h3>Comentário 3</h3>
-            </div>
-            <div style="margin-left: 200px; margin-bottom:10px; padding-top:15px">
-              <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-              <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-              <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-              <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
-              <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
-            </div>
-          </div>
-          <div><h5>Autor - Semestre</h5></div>
-          <div style="font-size: 11px;">Ut labores minimum atomorum pro. Laudem tibique ut has.
-            Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.
-          </div>
-        </div>
+        <card-comentario title="Comentário 1" rate="2" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
+          Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
+          nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
+        <card-comentario title="Comentário 2" rate="4" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
+          Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
+          nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
+        <card-comentario title="Comentário 3" rate="1" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
+          Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
+          nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
+        <card-comentario title="Comentário 4" rate="5" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
+          Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
+          nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
       </div>
 
     </div>
@@ -117,6 +76,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script>
     class BibsisMateria extends Polymer.Element {
       static get is() { return 'bibsis-materia'; }
+
+      static get properties() {
+        return {
+          autor1: {
+            type: Object,
+            value: {
+              nome: "joão",
+              semestre: "6"
+            }
+          }
+        }
+      }
     }
 
     window.customElements.define(BibsisMateria.is, BibsisMateria);
