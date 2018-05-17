@@ -27,6 +27,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="lazy-import" href="my-view2.html">
 <link rel="lazy-import" href="bibsis-home.html">
 <link rel="lazy-import" href="my-view404.html">
+
+<link rel="import" href="bibsis-util.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="bibsis-app">
@@ -105,6 +107,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           // This shouldn't be neccessary,T but the Analyzer isn't picking up
           // Polymer.Element#rootPath
           rootPath: String,
+          params: Object
         };
       }
 
@@ -112,6 +115,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         return [
           '_routePageChanged(routeData.page)',
         ];
+      }
+
+      ready() {
+        super.ready();
+        addEventListener("redirect", (e) => {
+          this._redirect(e.detail.page, e.detail.params);
+        });
+      }
+
+      _redirect(page, params) {
+        this.params = params;
+        this.page = page;
       }
 
       _routePageChanged(page) {
