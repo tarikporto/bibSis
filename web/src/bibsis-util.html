@@ -1,0 +1,36 @@
+<dom-module id="bibsis-util">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+
+    </style>
+
+    <div class="card">
+      <div class="circle">[[locura]]</div>
+      <h1>View One</h1>
+      <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
+      <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
+    </div>
+  </template>
+
+  <script>
+    class BibsisUtil extends Polymer.Element {
+      static get is() { return 'bibsis-util'; }
+
+      static redirect(page, params) {
+        dispatchEvent(new CustomEvent("redirect", {
+          detail: {
+            page: page,
+            params: params
+          }
+        }));
+      }
+
+    }
+
+    window.customElements.define(BibsisUtil.is, BibsisUtil);
+  </script>
+</dom-module>
