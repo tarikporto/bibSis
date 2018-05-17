@@ -10,21 +10,99 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="bibsis-materia">
   <template>
-    <style include="shared-styles">
+    <style include="shared-styles" is="custom-style">
       :host {
         display: block;
 
         padding: 10px;
       }
+      .my-button {
+        color: var(--paper-yellow-500);
+        height: 40px;
+        width: 40px;
+        padding: 1px;
+      }
+
+      }
     </style>
 
-    <div class="card">
+    <div class="card" style="width:50%;float:left">
+      <div>
+        <h1>Nome da Matéria</h1>
+
+        <div class="card" style="height:200px;">
+          <div>
+            <div style="float:left">
+              <h3>Comentário 1</h3>
+            </div>
+            <div style="margin-left: 200px; margin-bottom:10px; padding-top:15px">
+              <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
+              <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
+              <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
+              <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
+              <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
+            </div>
+          </div>
+          <div><h5>Autor - Semestre</h5></div>
+          <div style="font-size: 11px;">Ut labores minimum atomorum pro. Laudem tibique ut has.
+            Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.
+          </div>
+        </div>
+        <div class="card" style="height:200px;">
+          <div>
+            <div style="float:left">
+              <h3>Comentário 2</h3>
+            </div>
+            <div style="margin-left: 200px; margin-bottom:10px; padding-top:15px">
+              <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
+              <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
+              <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
+              <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
+              <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
+            </div>
+          </div>
+          <div><h5>Autor - Semestre</h5></div>
+          <div style="font-size: 11px;">Ut labores minimum atomorum pro. Laudem tibique ut has.
+            Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.
+          </div>
+        </div>
+        <div class="card" style="height:200px;">
+          <div>
+            <div style="float:left">
+              <h3>Comentário 3</h3>
+            </div>
+            <div style="margin-left: 200px; margin-bottom:10px; padding-top:15px">
+              <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
+              <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
+              <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
+              <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
+              <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
+            </div>
+          </div>
+          <div><h5>Autor - Semestre</h5></div>
+          <div style="font-size: 11px;">Ut labores minimum atomorum pro. Laudem tibique ut has.
+            Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.
+          </div>
+        </div>
+      </div>
 
     </div>
+    <div class="card" style="margin-left:56%;width:40%;height:100%; padding:15px;">
+      <h1>Materiais</h1>
+      <div><paper-icon-button icon="bibsis-icons-materia:noticia"></paper-icon-button>Notícia 1</div>
+      <div><paper-icon-button icon="bibsis-icons-materia:artigo"></paper-icon-button>Artigo 1</div>
+      <div><paper-icon-button icon="bibsis-icons-materia:imagem"></paper-icon-button>Imagem 1</div>
+      <div><paper-icon-button icon="bibsis-icons-materia:audio"></paper-icon-button>Áudio 1</div>
+        <div><paper-icon-button icon="bibsis-icons-materia:video"></paper-icon-button>Vídeo 1</div>
+      <div><paper-icon-button icon="bibsis-icons-materia:webpage"></paper-icon-button>Link 1</div>
+      <div><paper-icon-button icon="bibsis-icons-materia:livro"></paper-icon-button>Livro 1</div>
+    </div>
+
   </template>
 
   <script>
