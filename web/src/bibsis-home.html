@@ -8,24 +8,50 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 
 
 <dom-module id="bibsis-home">
   <template>
     <style include="shared-styles">
       :host {
-        display: block;
-        padding: 10px;
+      }
+
+      .inscreva-se-botao {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .textos {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .container {
+        background-image: url("images/student-network.png");
+      }
+
+      h1 {
+        align-self: center;
+      }
+      
+      h2 {
+        align-self: center;
       }
 
     </style>
 
-    <div class="card">
-      <div class="circle">[[locura]]</div>
-      <h1>View One</h1>
-      <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
-      <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
+    <div class="container">
+      <div class="textos">
+        <h1>Olá</h1>
+        <h2>Bibsis é uma ferramenta...</h2>
+      </div>
+      <div class="inscreva-se-botao">
+        <paper-button on-tap="_onclickBotao" raised primary>Inscreva-se!</paper-button>
+      </div>
     </div>
+
   </template>
 
   <script>
@@ -43,8 +69,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       ready() {
         super.ready();
+      }
 
-        this.locura = "Andre";
+      _onclickBotao() {
+        alert("botão!");
       }
     }
 
