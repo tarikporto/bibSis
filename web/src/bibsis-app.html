@@ -23,14 +23,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="bibsis-icons.html">
 
 <link rel="lazy-import" href="my-view1.html">
-<<<<<<< HEAD
-<link rel="lazy-import" href="materia.html">
-=======
 <link rel="lazy-import" href="bibsis-materia.html">
->>>>>>> a6a6da55fedd40d34c21b42d6a8706d05562c50f
+<link rel="lazy-import" href="bibsis-comentario.html">
+<link rel="lazy-import" href="bibsis-favoritos.html">
 <link rel="lazy-import" href="my-view2.html">
 <link rel="lazy-import" href="bibsis-home.html">
 <link rel="lazy-import" href="my-view404.html">
+
+<link rel="import" href="bibsis-util.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="bibsis-app">
@@ -62,7 +62,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <a name="view1" href="[[rootPath]]view1">View One</a>
           <a name="view2" href="[[rootPath]]view2">View Two</a>
           <a name="home" href="[[rootPath]]home">Home</a>
-          <a name="materia" href="[[rootPath]]materia">Matéria</a>
+            <a name="materia" href="[[rootPath]]materia">Matéria</a>
+            <a name="favoritos" href="[[rootPath]]favoritos">Favoritos</a>
+            <a name="comentario" href="[[rootPath]]comentario">Comentário</a>
         </iron-selector>
       </app-drawer>
 
@@ -70,23 +72,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-header-layout has-scrolling-region>
 
         <app-header slot="header" condenses reveals effects="waterfall">
-          <paper-toolbar>
-            <paper-icon-button slot="top" icon="menu" on-tap="menuAction"></paper-icon-button>
-            <div slot="top" class="title">BibSis</div>
-            <paper-icon-button slot="top" icon="more-vert" on-tap="moreAction"></paper-icon-button>
-          </paper-toolbar>
+          <app-toolbar>
+            <paper-icon-button icon="bibsis-icons:menu" drawer-toggle></paper-icon-button>
+            <div main-title>bibSis</div>
+          </app-toolbar>
         </app-header>
 
         <iron-pages
             selected="[[page]]"
             attr-for-selected="name"
-            fallback-selection="view404"
+            fallback-selection="404"
             role="main">
-          <my-view1 name="view1"></my-view1>
           <bibsis-home name="home"></bibsis-home>
           <bibsis-materia name="materia"></bibsis-materia>
-          <my-view2 name="view2"></my-view2>
-          <my-view404 name="view404"></my-view404>
+          <bibsis-favoritos name="favoritos"></bibsis-favoritos>
+          <bibsis-comentario name="comentario"></bibsis-comentario>
+          <bibsis-404 name="404"></bibsis-404>
         </iron-pages>
       </app-header-layout>
     </app-drawer-layout>
@@ -112,6 +113,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           // This shouldn't be neccessary,T but the Analyzer isn't picking up
           // Polymer.Element#rootPath
           rootPath: String,
+          params: Object
         };
       }
 
@@ -121,10 +123,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         ];
       }
 
+      ready() {
+        super.ready();
+        addEventListener("redirect", (e) => {
+          this._redirect(e.detail.page, e.detail.params);
+        });
+      }
+
+      _redirect(page, params) {
+        this.params = params;
+        this.page = page;
+      }
+
       _routePageChanged(page) {
         // If no page was found in the route data, page will be an empty string.
         // Default to 'view1' in that case.
-        this.page = page || 'view1';
+        this.page = page || 'home';
 
         // Close a non-persistent drawer when the page & route are changed.
         if (!this.$.drawer.persistent) {
@@ -143,7 +157,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       _showPage404() {
-        this.page = 'view404';
+        this.page = '404';
       }
     }
 

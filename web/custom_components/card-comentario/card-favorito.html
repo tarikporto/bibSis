@@ -1,0 +1,122 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="card-favorito">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .title-rate {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+
+      .my-button {
+        color: var(--paper-yellow-500);
+        height: 40px;
+        width: 40px;
+        padding: 1px;
+      }
+
+      .card {
+        margin: 24px;
+        padding: 16px;
+        color: #757575;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        min-height: 200px;
+      }
+
+    </style>
+
+    <div class="card">
+      <div class="title-rate">
+        <div>
+          <h3>[[title]]</h3>
+        </div>
+        <div>
+          <template id="stars" is="dom-repeat" items="[[starsArray]]">
+            <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
+          </template>
+          <template id="emptyStars" is="dom-repeat" items="[[emptyArray]]">
+            <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
+          </template>
+        </div>
+      </div>
+      <div><h5>[[author.nome]] - [[author.semestre]]</h5></div>
+      <div style="font-size: 11px;">[[text]]
+      </div>
+      <div style="font-size: 11px;">[[materiais]]
+      </div>
+      <paper-button>Leia Mais</paper-button>
+
+    </div>
+  </template>
+
+  <script>
+    /**
+     * `card-comentario`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class CardComentario extends Polymer.Element {
+      static get is() { return 'card-comentario'; }
+      static get properties() {
+        return {
+          title: {
+            type: String,
+            value: ""
+          },
+          rate: {
+            type: Number,
+            value: 3,
+            observer: "_computeArrays"
+          },
+          author: {
+            type: Object,
+            value: {}
+          },
+          text: {
+            type: String,
+            value: ""
+          },
+          starsArray: {
+            type: Array,
+            value: []
+          },
+          emptyArray: {
+            type: Array,
+            value: []
+          }
+        };
+      }
+
+      ready() {
+        super.ready();
+
+        this.emptyStars = 5 - this.rate;
+      }
+
+      _computeArrays(value) {
+        this.starsArray = [];
+        this.emptyArray = [];
+
+        for(let i = 0; i < value; i++)
+          this.push("starsArray", i);
+
+        for(let i = 0; i < 5 - value; i++)
+          this.push("emptyArray", i);
+      }
+    }
+
+    window.customElements.define(CardComentario.is, CardComentario);
+  </script>
+</dom-module>

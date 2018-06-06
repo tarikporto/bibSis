@@ -1,7 +1,7 @@
 {
-  "name": "My App",
-  "short_name": "My App",
-  "description": "My App description",
+  "name": "BibSis",
+  "short_name": "BibSis",
+  "description": "BibSis description",
   "icons": [
     {
       "src": "images/manifest/icon-192x192.png",

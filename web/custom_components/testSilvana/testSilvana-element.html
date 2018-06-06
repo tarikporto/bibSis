@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="testSilvana-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * `testSilvana-element`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class TestSilvanaElement extends Polymer.Element {
+      static get is() { return 'testSilvana-element'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'testSilvana-element'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(TestSilvanaElement.is, TestSilvanaElement);
+  </script>
+</dom-module>

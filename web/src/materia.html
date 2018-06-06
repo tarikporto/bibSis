@@ -7,17 +7,10 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/paper-input/paper-input.html">
-<link rel="import" href="shared-styles.html">
 
-<<<<<<< HEAD:web/src/materia.html
-<dom-module id="bibsis-materia">
-  <link rel="import" href="../../classical/classical.css" type="css">
-=======
+
 <dom-module id="bibsis-home">
->>>>>>> a6a6da55fedd40d34c21b42d6a8706d05562c50f:web/src/bibsis-home.html
   <template>
     <style include="shared-styles">
       :host {
@@ -28,20 +21,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <div class="card">
-        <div class="card">
-          <div class="circle">[[locura]]</div>
-          <h1>View One</h1>
-          <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
-          <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
-        </div>
+      <div class="circle">[[locura]]</div>
+      <h1>View One</h1>
+      <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
+      <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
     </div>
   </template>
 
   <script>
-    class BibsisMateria extends Polymer.Element {
-      static get is() { return 'bibsis-materia'; }
+    class BibsisHome extends Polymer.Element {
+      static get is() { return 'bibsis-home'; }
+
+      static get properties() {
+        return {
+          locura: {
+            type: String,
+            value: "Tarik"
+          }
+        };
+      }
+
+      ready() {
+        super.ready();
+
+        this.locura = "Andre";
+      }
     }
 
-    window.customElements.define(BibsisMateria.is, BibsisMateria);
+    window.customElements.define(BibsisHome.is, BibsisHome);
   </script>
 </dom-module>
