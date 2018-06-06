@@ -23,8 +23,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class="card">
         <div class="busca-disciplina">
             <paper-input>
-                <paper-icon-button slot="prefix" icon="bibsis-icons:search"></paper-icon-button>
-
+                <paper-icon-button slot="prefix" icon="bibsis-icons:search" value="{{valorBusca}}"></paper-icon-button>
             </paper-input>
         </div>
     </div>
@@ -37,14 +36,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       static get properties() {
         return {
-          autor1: {
-            type: Object,
-            value: {
-              nome: "joão",
-              semestre: "6"
-            }
+          valorBusca: {
+            type: String,
+            value: "",
+            observer: "_buscaDisciplinas"
           }
         }
+      }
+
+      _buscaDisciplinas () {
+        
       }
     }
 
