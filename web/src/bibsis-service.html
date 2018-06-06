@@ -1,0 +1,36 @@
+<dom-module id="bibsis-service">
+    <script>
+        class BibsisService extends Polymer.Element {
+            static get is() {
+                return 'bibsis-service';
+            }
+
+            static get properties() {
+                return {
+                    headers: {
+                        type: Object,
+                        notify: true
+                    },
+                    url: {
+                        type: String,
+                        notify: true,
+                        value: ""
+                    }
+                };
+            }
+
+            constructor() {
+                super();
+                this.headers = [];
+                this.url = "";
+            }
+
+            ObterPromessa(request) {
+                return Promise.all([request.completes]);
+            }
+               
+        }
+
+        customElements.define(BibsisService.is, BibsisService);
+    </script>
+</dom-module>
