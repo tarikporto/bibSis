@@ -1,4 +1,10 @@
 <dom-module id="bibsis-service">
+    <template>
+        <iron-ajax id="buscarDisciplinas" url="{{url}}/disciplinas"
+        handle-as="json" method="GET" content-type="application/json" headers="{{headers}}"></iron-ajax>
+        <iron-ajax id="criarComentario" url="{{url}}/comentarios" handle-as="json" method="POST" content-type="application/json"
+            headers="{{headers}}" body="{{request}}"></iron-ajax>
+    </template>
     <script>
         class BibsisService extends Polymer.Element {
             static get is() {
@@ -15,6 +21,10 @@
                         type: String,
                         notify: true,
                         value: ""
+                    },
+                    request: {
+                        type: Object,
+                        value: {}
                     }
                 };
             }
@@ -22,11 +32,33 @@
             constructor() {
                 super();
                 this.headers = [];
-                this.url = "";
+                this.url = "https://localhost:3000";
             }
 
             ObterPromessa(request) {
                 return Promise.all([request.completes]);
+            }
+
+            MostrarMensagemErro(erroString) {
+                console.log(erroString);
+            }
+
+            CriarComentario (comentarioRequest) {
+                this.request = comentarioRequest;
+
+                return this.ObterPromessa(this.$.criarComentario.generateRequest())
+                    .then((resposta) => resposta[0].response)
+                    .catch(() => {
+                        this.MostrarMensagemErro("Erro");
+                    })
+            }
+
+            BuscarDisciplinas () {
+                return this.ObterPromessa(this.$.buscarDisciplinas.generateRequest())
+                    .then((resposta) => resposta[0].response)
+                    .catch(() => {
+                        this.MostrarMensagemErro("Erro");
+                    })
             }
                
         }
