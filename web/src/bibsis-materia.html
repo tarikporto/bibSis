@@ -30,6 +30,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding: 1px;
       }
 
+      .container {
+        display: flex;
+      }
+
       .card {
         margin: 24px;
         padding: 16px;
@@ -40,45 +44,45 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         min-height: 200px;
       }
     </style>
+    <div class="container">
+      <div class="card" style="flex:2">
+        <div>
+          <div style="width:50%;float:left">
+            <h1>Nome da Matéria</h1>
+          </div>
+          <div style="margin-left:56%;padding-top:15px;">
+            <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
+            <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
+            <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
+            <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
+            <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
+          </div>
+          <card-comentario title="Comentário 1" rate="4" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
+            Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
+            nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
+          <card-comentario title="Comentário 2" rate="4" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
+            Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
+            nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
+          <card-comentario title="Comentário 3" rate="1" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
+            Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
+            nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
+          <card-comentario title="Comentário 4" rate="5" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
+            Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
+            nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
+        </div>
 
-    <div class="card" style="width:50%;float:left">
-      <div>
-        <div style="width:50%;float:left">
-          <h1>Nome da Matéria</h1>
-        </div>
-        <div style="margin-left:56%;padding-top:15px;">
-          <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
-        </div>
-        <card-comentario title="Comentário 1" rate="2" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
-          Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
-          nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
-        <card-comentario title="Comentário 2" rate="4" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
-          Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
-          nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
-        <card-comentario title="Comentário 3" rate="1" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
-          Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
-          nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
-        <card-comentario title="Comentário 4" rate="5" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
-          Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
-          nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
       </div>
-
+      <div class="card" style="flex:1">
+        <h1>Materiais</h1>
+        <div><paper-icon-button icon="bibsis-icons-materia:noticia"></paper-icon-button>Notícia 1</div>
+        <div><paper-icon-button icon="bibsis-icons-materia:artigo"></paper-icon-button>Artigo 1</div>
+        <div><paper-icon-button icon="bibsis-icons-materia:imagem"></paper-icon-button>Imagem 1</div>
+        <div><paper-icon-button icon="bibsis-icons-materia:audio"></paper-icon-button>Áudio 1</div>
+          <div><paper-icon-button icon="bibsis-icons-materia:video"></paper-icon-button>Vídeo 1</div>
+        <div><paper-icon-button icon="bibsis-icons-materia:webpage"></paper-icon-button>Link 1</div>
+        <div><paper-icon-button icon="bibsis-icons-materia:livro"></paper-icon-button>Livro 1</div>
+      </div>
     </div>
-    <div class="card" style="margin-left:56%;width:40%;height:100%; padding:15px;">
-      <h1>Materiais</h1>
-      <div><paper-icon-button icon="bibsis-icons-materia:noticia"></paper-icon-button>Notícia 1</div>
-      <div><paper-icon-button icon="bibsis-icons-materia:artigo"></paper-icon-button>Artigo 1</div>
-      <div><paper-icon-button icon="bibsis-icons-materia:imagem"></paper-icon-button>Imagem 1</div>
-      <div><paper-icon-button icon="bibsis-icons-materia:audio"></paper-icon-button>Áudio 1</div>
-        <div><paper-icon-button icon="bibsis-icons-materia:video"></paper-icon-button>Vídeo 1</div>
-      <div><paper-icon-button icon="bibsis-icons-materia:webpage"></paper-icon-button>Link 1</div>
-      <div><paper-icon-button icon="bibsis-icons-materia:livro"></paper-icon-button>Livro 1</div>
-    </div>
-
   </template>
 
   <script>
