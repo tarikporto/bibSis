@@ -22,7 +22,7 @@ app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})
 });
 
-app.listen(3000);
+app.listen(3030);
 
 console.log("bibSis RESTful API server started on: " + port);
 
