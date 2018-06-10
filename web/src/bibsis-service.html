@@ -50,7 +50,7 @@
                     .then((resposta) => resposta[0].response)
                     .catch(() => {
                         this.MostrarMensagemErro("Erro");
-                    })
+                    });
             }
 
             BuscarDisciplinas () {
@@ -58,7 +58,7 @@
                     .then((resposta) => resposta[0].response)
                     .catch(() => {
                         this.MostrarMensagemErro("Erro");
-                    })
+                    });
             }
                
         }

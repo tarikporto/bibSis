@@ -39,28 +39,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         width: 40px;
         padding: 1px;
       }
-      paper-dropdown-menu, paper-listbox {
-        width: 350px;
-      }
-      paper-dropdown-menu {
-        height: 200px;
-      }
 
     </style>
 
     <div class="card">
       <div>
         <h1>Adicionar comentário à Disciplina</h1>
-        <paper-dropdown-menu label="Disciplina">
-          <paper-listbox slot="dropdown-content">
-            <paper-item>Disciplina 1</paper-item>
-            <paper-item>Disciplina 2</paper-item>
-            <paper-item>Disciplina 3</paper-item>
-            <paper-item>Disciplina 4</paper-item>
-          </paper-listbox>
-        </paper-dropdown-menu>
-        <br>
-        Professor:<iron-autogrow-textarea></iron-autogrow-textarea><br><br>
+        <paper-dropdown-menu label="Dinosaurs">
+            <paper-listbox slot="dropdown-content" selected="0">
+              <paper-item>allosaurus</paper-item>
+              <paper-item>brontosaurus</paper-item>
+              <paper-item>carcharodontosaurus</paper-item>
+              <paper-item>diplodocus</paper-item>
+            </paper-listbox>
+          </paper-dropdown-menu>
+        <paper-input label="Professor"></paper-input>
         <div style="float:left;">
           Avaliação:
         </div>
@@ -81,8 +74,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <paper-icon-button icon="bibsis-icons-materia:plus-empty" class="my-button2"></paper-icon-button>
           <paper-icon-button icon="bibsis-icons-materia:plus-empty" class="my-button2"></paper-icon-button>
         </div>
-        Horário:<iron-autogrow-textarea></iron-autogrow-textarea><br><br>
-        Comentário:<iron-autogrow-textarea max-rows="4"></iron-autogrow-textarea><br><br>
+        <paper-input label="Horário"></paper-input>
+        <paper-input label="Comentário"></paper-input>
       <div><paper-icon-button icon="bibsis-icons-materia:noticia"></paper-icon-button>Notícia 1</div>
       <div><paper-icon-button icon="bibsis-icons-materia:artigo"></paper-icon-button>Artigo 1</div>
       <div><paper-icon-button icon="bibsis-icons-materia:imagem"></paper-icon-button>Imagem 1</div>
