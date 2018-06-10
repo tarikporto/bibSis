@@ -17,7 +17,8 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
     "paper-ui-elements": "PolymerElements/paper-ui-elements",
     "paper-overlay-elements": "PolymerElements/paper-overlay-elements",
-    "paper-input-elements": "PolymerElements/paper-input-elements"
+    "paper-input-elements": "PolymerElements/paper-input-elements",
+    "web-animations-js": "web-animations/web-animations-js#2.2.2"
   },
   "resolutions": {
     "polymer": "^2.0.0"
