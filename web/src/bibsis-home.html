@@ -19,9 +19,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding: 10px;
       }
 
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
     </style>
 
-    <div class="card">
+    <div class="card container">
       <h1>BibSis</h1>
 
       <p>Olá, futuro Engenheiro de Sistemas!</p>
@@ -32,7 +38,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </p>
       <p>
         Não se esqueça de nos ajudar a crescer. Juntos somos mais fortes!</p>
-      <div style="align:middle"><paper-button>Inscreva-se ou faça Login</paper-button>
+      <div><paper-button primary raised>Inscreva-se ou faça Login</paper-button>
     </div>
   </template>
 
@@ -42,17 +48,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       static get properties() {
         return {
-          locura: {
-            type: String,
-            value: "Tarik"
-          }
+          
         };
       }
 
       ready() {
         super.ready();
-
-        this.locura = "Andre";
       }
     }
 
