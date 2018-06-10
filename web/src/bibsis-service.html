@@ -32,7 +32,7 @@
             constructor() {
                 super();
                 this.headers = [];
-                this.url = "https://localhost:3000";
+                this.url = "http://localhost:3000";
             }
 
             ObterPromessa(request) {
@@ -47,20 +47,22 @@
                 this.request = comentarioRequest;
 
                 return this.ObterPromessa(this.$.criarComentario.generateRequest())
-                    .then((resposta) => resposta[0].response)
+                    .then((resposta) => console.log(resposta[0].response))
                     .catch(() => {
                         this.MostrarMensagemErro("Erro");
-                    });
+                    })
             }
 
             BuscarDisciplinas () {
                 return this.ObterPromessa(this.$.buscarDisciplinas.generateRequest())
-                    .then((resposta) => resposta[0].response)
+                    .then((resposta) => {
+                      resposta[0].response;
+                    })
                     .catch(() => {
                         this.MostrarMensagemErro("Erro");
-                    });
+                    })
             }
-               
+
         }
 
         customElements.define(BibsisService.is, BibsisService);
