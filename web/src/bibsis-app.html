@@ -41,6 +41,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         background-color: var(--paper-toolbar-background);
         color: #ffffff;
       }
+
+      .drawer-link {
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .drawer-a {
+        color: unset;
+        text-decoration: unset;
+      }
     </style>
 
     <app-location
@@ -55,18 +65,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         tail="{{subroute}}">
     </app-route>
 
-    <app-drawer-layout fullbleed narrow="{{narrow}}" force-narrow>
+    <app-drawer-layout fullbleed narrow="{{narrow}}">
       <!-- Drawer content -->
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="[[rootPath]]view1">View One</a>
-          <a name="view2" href="[[rootPath]]view2">View Two</a>
-          <a name="home" href="[[rootPath]]home">Home</a>
-            <a name="materia" href="[[rootPath]]materia">Matéria</a>
-            <a name="favoritos" href="[[rootPath]]favoritos">Favoritos</a>
-          <a name="comentario" href="[[rootPath]]comentario">Comentário</a>
-          <a name="grade" href="[[rootPath]]grade">Grade</a>
+          <paper-button class="drawer-link" link><a name="home" href="[[rootPath]]home">Home</a></paper-button>
+          <paper-button class="drawer-link" link><a name="grade" href="[[rootPath]]grade">Grade Curricular</a></paper-button>
+          <paper-button class="drawer-link" link><a name="comentario" href="[[rootPath]]comentario">Criar Comentário</a></paper-button>
         </iron-selector>
       </app-drawer>
 
