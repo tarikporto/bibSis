@@ -1,9 +1,19 @@
 <dom-module id="bibsis-service">
     <template>
+        <!-- DISCIPLINAS -->
         <iron-ajax id="buscarDisciplinas" url="{{url}}/disciplinas"
         handle-as="json" method="GET" content-type="application/json" headers="{{headers}}"></iron-ajax>
-        <iron-ajax id="criarComentario" url="{{url}}/comentarios" handle-as="json" method="POST" content-type="application/json"
-            headers="{{headers}}" body="{{request}}"></iron-ajax>
+
+        <iron-ajax id="buscarDisciplinasPorNome" url="{{url}}/disciplinas/query?nome=[[query.nome]]"
+        handle-as="json" method="GET" content-type="application/json" headers="{{headers}}"></iron-ajax>
+
+        <!-- COMENTARIOS -->
+        <iron-ajax id="criarComentario" url="{{url}}/comentarios"
+        handle-as="json" method="POST" content-type="application/json" headers="{{headers}}" body="{{request}}"></iron-ajax>
+
+        <iron-ajax id="buscarComentarioPorId" url="{{url}}/comentarios/[[query.id]]"
+        handle-as="json" method="GET" content-type="application/json" headers="{{headers}}"></iron-ajax>
+
     </template>
     <script>
         class BibsisService extends Polymer.Element {
@@ -25,12 +35,17 @@
                     request: {
                         type: Object,
                         value: {}
+                    },
+                    query: {
+                        type: Object,
+                        value: {}
                     }
                 };
             }
 
             constructor() {
                 super();
+                this.ready();
                 this.headers = [];
                 this.url = "http://localhost:3000";
             }
@@ -47,20 +62,44 @@
                 this.request = comentarioRequest;
 
                 return this.ObterPromessa(this.$.criarComentario.generateRequest())
-                    .then((resposta) => console.log(resposta[0].response))
+                    .then((resposta) => {
+                        return resposta[0].response;
+                    })
                     .catch(() => {
                         this.MostrarMensagemErro("Erro");
-                    })
+                    });
             }
 
             BuscarDisciplinas () {
                 return this.ObterPromessa(this.$.buscarDisciplinas.generateRequest())
                     .then((resposta) => {
-                      resposta[0].response;
+                        return resposta[0].response;
                     })
                     .catch(() => {
                         this.MostrarMensagemErro("Erro");
+                    });
+            }
+
+            BuscarDisciplinasPorNome (nome) {
+                this.set("query.nome", nome);
+                return this.ObterPromessa(this.$.buscarDisciplinasPorNome.generateRequest())
+                    .then((resposta) => {
+                        return resposta[0].response;
                     })
+                    .catch(() => {
+                        this.MostrarMensagemErro("Erro");
+                    });
+            }
+
+            BuscarComentarioPorId(id) {
+              this.set("query.id", id);
+              return this.ObterPromessa(this.$.buscarComentarioPorId.generateRequest())
+                  .then((resposta) => {
+                      return resposta[0].response;
+                  })
+                  .catch(() => {
+                      this.MostrarMensagemErro("Erro");
+                  })
             }
 
         }

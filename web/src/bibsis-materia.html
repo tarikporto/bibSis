@@ -34,6 +34,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: flex;
       }
 
+      .nome-materia-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+
       .card {
         margin: 24px;
         padding: 16px;
@@ -47,28 +53,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class="container">
       <div class="card" style="flex:2">
         <div>
-          <div style="width:50%;float:left">
-            <h1>Nome da Matéria</h1>
+          <div class="nome-materia-container">
+            <div>
+              <h1>[[nomeDisciplina]]</h1>
+            </div>
+            <rate-display rate="[[disciplina.dificuldade]]" read-only></rate-display>
           </div>
-          <div style="margin-left:56%;padding-top:15px;">
-            <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-            <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-            <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-            <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
-            <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
-          </div>
-          <card-comentario title="Comentário 1" rate="4" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
-            Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
-            nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
-          <card-comentario title="Comentário 2" rate="4" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
-            Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
-            nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
-          <card-comentario title="Comentário 3" rate="1" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
-            Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
-            nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
-          <card-comentario title="Comentário 4" rate="5" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
-            Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
-            nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
+          <template is="dom-repeat" items="[[comentarios]]">
+            <card-comentario title="[[item.titulo]]" rate="4" author="{{autor1}}" text="[[item.texto]]"></card-comentario>
+          </template>
         </div>
 
       </div>
@@ -97,8 +90,34 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               nome: "joão",
               semestre: "6"
             }
+          },
+          nomeDisciplina: {
+            type: String,
+            value: "Laboratório de Projeto III",
+            observer: "_nomeDisciplinaChanged"
+          },
+          disciplina: {
+            type: Object
+          },
+          comentarios: {
+            type: Array,
+            value: []
           }
         }
+      }
+
+      _nomeDisciplinaChanged (val) {
+        new BibsisService().BuscarDisciplinasPorNome(val).then((resposta)=>{
+	         this.set("disciplina", resposta[0]);
+
+           var comentariosArray = [];
+           for(let i = 0; i < this.disciplina.comentarios.length; i++) {
+             new BibsisService().BuscarComentarioPorId(this.disciplina.comentarios[i]).then((r) => {
+               this.push("comentarios",r);
+             });
+           }
+
+        })
       }
     }
 

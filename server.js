@@ -1,6 +1,7 @@
 var express = require("express"),
   app = express(),
   port = process.env.PORT || 3000,
+  cors = require("cors");
   mongoose = require("mongoose"),
   Usuario = require("./api/models/UsuarioModel"),
   Comentario = require("./api/models/ComentarioModel"),
@@ -13,6 +14,7 @@ var express = require("express"),
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/bibSisDB");
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 

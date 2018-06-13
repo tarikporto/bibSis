@@ -10,12 +10,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/neon-animation/web-animations.html">
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
 <link rel="import" href="../custom_components/card-comentario/card-comentario.html">
+<link rel="import" href="../custom_components/testSilvana/rate-display.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="bibsis-comentario">
@@ -40,49 +42,48 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding: 1px;
       }
 
+      .container{
+        padding: 0px 10px;
+      }
+
     </style>
 
     <div class="card">
-      <div>
+      <div class="container">
         <h1>Adicionar comentário à Disciplina</h1>
-        <paper-dropdown-menu label="Dinosaurs">
-            <paper-listbox slot="dropdown-content" selected="0">
-              <paper-item>allosaurus</paper-item>
-              <paper-item>brontosaurus</paper-item>
-              <paper-item>carcharodontosaurus</paper-item>
-              <paper-item>diplodocus</paper-item>
-            </paper-listbox>
-          </paper-dropdown-menu>
-        <paper-input label="Professor"></paper-input>
-        <div style="float:left;">
-          Avaliação:
+        <div class="form-comentario">
+
+          <div class="input-box">
+            <paper-dropdown-menu label="Disciplina">
+              <paper-listbox slot="dropdown-content">
+                <paper-item selected></paper-item>
+                <template is="dom-repeat" items="[[disciplinas]]">
+                  <paper-item>[[item.nome]]</paper-item>
+                </template>
+              </paper-listbox>
+            </paper-dropdown-menu>
+          </div>
+          <div class="input-box">
+            <paper-input label="Professor"></paper-input>
+          </div>
+          <div class="input-box">
+            <div class="input-label">
+              Avaliação:
+            </div>
+            <div>
+              <rate-display rate="3"></rate-display>
+            </div>
+          </div>
+          <div class="input-box">
+            <paper-input label="Horário"></paper-input>
+          </div>
+          <div class="input-box">
+            <paper-input label="Comentário"></paper-input>
+          </div>
+          <div class="input-box">
+            <paper-button raised success>Enviar Comentário</paper-button>
+          </div>
         </div>
-        <div style="margin-left:10;">
-          <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
-        </div>
-        <div style="float:left;">
-          Dificuldade:
-        </div>
-        <div style="margin-left:10;">
-          <paper-icon-button icon="bibsis-icons-materia:plus" class="my-button2"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:plus" class="my-button2"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:plus" class="my-button2"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:plus-empty" class="my-button2"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:plus-empty" class="my-button2"></paper-icon-button>
-        </div>
-        <paper-input label="Horário"></paper-input>
-        <paper-input label="Comentário"></paper-input>
-      <div><paper-icon-button icon="bibsis-icons-materia:noticia"></paper-icon-button>Notícia 1</div>
-      <div><paper-icon-button icon="bibsis-icons-materia:artigo"></paper-icon-button>Artigo 1</div>
-      <div><paper-icon-button icon="bibsis-icons-materia:imagem"></paper-icon-button>Imagem 1</div>
-      <div><paper-icon-button icon="bibsis-icons-materia:audio"></paper-icon-button>Áudio 1</div>
-      <div><paper-icon-button icon="bibsis-icons-materia:video"></paper-icon-button>Vídeo 1</div>
-      <div><paper-icon-button icon="bibsis-icons-materia:webpage"></paper-icon-button>Link 1</div>
-      <div><paper-icon-button icon="bibsis-icons-materia:livro"></paper-icon-button>Livro 1</div>
     </div>
 
   </template>
@@ -93,14 +94,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       static get properties() {
         return {
-          autor1: {
-            type: Object,
-            value: {
-              nome: "joão",
-              semestre: "6"
-            }
+          disciplinas: {
+            type: Array,
+            value: []
           }
         }
+      }
+
+      constructor () {
+        super();
+      }
+
+      ready () {
+        super.ready();
+
+        new BibsisService().BuscarDisciplinas().then((resposta) => {
+          if(resposta) {
+            this.disciplinas = resposta;
+          }
+        });
       }
     }
 
