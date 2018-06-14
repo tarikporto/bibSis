@@ -48,16 +48,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <h4>Comentários e novidades sobre suas matérias favoritas</h4>
         </div>
         <div style="padding-top:80px;">
-          <card-favorito title="Matéria Favorita 1" rate="2" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
+          <template is="dom-repeat" items="[[disciplinas]]">
+          <card-favorito title=[[item.nome]] rate=[[iitem.avaliacao]] author==[[item.comentarios[0]]] text="Ut labores minimum atomorum pro. Laudem tibique ut has.
             Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
             nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit." materiais="material1, material2"></card-favorito>
-          <card-favorito title="Matéria Favorita 2" rate="4" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
-              Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
-              nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit." materiais="material1, material2"></card-favorito>
-          <card-favorito title="Matéria Favorita 3" rate="5" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
-                Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
-                nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit." materiais="material1, material2"></card-favorito>
-
+        </template>
         </div>
       </div>
     </div>
@@ -70,14 +65,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       static get properties() {
         return {
-          autor1: {
-            type: Object,
-            value: {
-              nome: "joão",
-              semestre: "6"
-            }
-          }
+          disciplinas: {
+            type: Array,
+            value: []
+          },
         }
+      }
+
+      constructor () {
+        super();
+      }
+
+      ready () {
+        super.ready();
+
+        new BibsisService().BuscarDisciplinas().then((resposta) => {
+          if(resposta) {
+            this.disciplinas = resposta;
+            console.log(resposta);
+          }
+        });
       }
     }
 
