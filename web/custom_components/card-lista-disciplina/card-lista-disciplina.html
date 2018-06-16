@@ -1,0 +1,59 @@
+<dom-module id="card-lista-disciplina">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .my-button {
+        color: var(--paper-yellow-500);
+        height: 40px;
+        width: 40px;
+        padding: 1px;
+      }
+
+      .card {
+        margin: 24px;
+        padding: 16px;
+        color: #757575;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        min-height: 200px;
+      }
+
+    </style>
+
+    <div class="card">
+      <paper-button>Leia Mais</paper-button>
+    </div>
+  </template>
+
+  <script>
+    /**
+     * `card-comentario`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class CardListaDisciplina extends Polymer.Element {
+      static get is() { return 'card-lista-disciplina'; }
+      static get properties() {
+        return {
+          disciplina: {
+            type: String,
+            value: ""
+          }
+        };
+      }
+
+      ready() {
+        super.ready();
+      }
+    }
+
+    window.customElements.define(CardListaDisciplina.is, CardListaDisciplina);
+  </script>
+</dom-module>

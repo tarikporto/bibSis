@@ -17,15 +17,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
 <link rel="import" href="../custom_components/card-comentario/card-comentario.html">
-<link rel="import" href="../custom_components/testSilvana/rate-display.html">
-<link rel="import" href="shared-styles.html">
+<link rel="import" href="../custom_components/rate-display/rate-display.html">
 
 <dom-module id="bibsis-comentario">
   <template>
-    <style include="shared-styles" is="custom-style">
+    <style include="shared-styles">
       :host {
         display: block;
-        padding: 10px;
       }
 
       .my-button {
@@ -42,8 +40,36 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding: 1px;
       }
 
+      .input-box {
+        padding: 8px 0;
+      }
+
+      .rate-box {
+        display: flex;
+        align-items: baseline;
+        margin-top: 12px;
+      }
+
+      .rate-separator {
+        margin: 0 8px;
+      }
+
       .container{
         padding: 0px 10px;
+      }
+
+      paper-dropdown-menu {
+        display: block;
+      }
+
+      .card {
+        margin: 24px;
+        padding: 16px;
+        color: #757575;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        min-height: 200px;
       }
 
     </style>
@@ -54,7 +80,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div class="form-comentario">
 
           <div class="input-box">
-            <paper-dropdown-menu label="Disciplina">
+            <paper-dropdown-menu label="Disciplina" horizontal-align="left">
               <paper-listbox slot="dropdown-content">
                 <paper-item selected></paper-item>
                 <template is="dom-repeat" items="[[disciplinas]]">
@@ -66,11 +92,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <div class="input-box">
             <paper-input label="Professor"></paper-input>
           </div>
-          <div class="input-box">
+          <div class="input-box rate-box">
             <div class="input-label">
               Avaliação:
             </div>
-            <div>
+            <div class="rate-separator">
               <rate-display rate="3"></rate-display>
             </div>
           </div>
