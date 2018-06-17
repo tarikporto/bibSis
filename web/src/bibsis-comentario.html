@@ -66,7 +66,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div class="form-comentario">
 
           <div class="input-box">
-            <paper-dropdown-menu label="Disciplina" horizontal-align="left">
+            <paper-dropdown-menu label="Disciplina" horizontal-align="left" on-iron-select="_itemSelected">
               <paper-listbox slot="dropdown-content">
                 <paper-item selected></paper-item>
                 <template is="dom-repeat" items="[[disciplinas]]">
@@ -76,7 +76,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </paper-dropdown-menu>
           </div>
           <div class="input-box">
-            <paper-input label="Professor"></paper-input>
+            <paper-input label="Professor" value="{{formData.professor}}" ></paper-input>
           </div>
           <div class="input-box rate-box">
             <div class="input-label">
@@ -87,13 +87,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </div>
           </div>
           <div class="input-box">
-            <paper-input label="Horário"></paper-input>
+            <paper-input label="Horário" value="{{formData.horario}}" ></paper-input>
           </div>
           <div class="input-box">
-            <paper-input label="Comentário"></paper-input>
+            <paper-input label="Comentário" value="{{formData.comentario}}" ></paper-input>
           </div>
           <div class="input-box">
-            <paper-button raised success>Enviar Comentário</paper-button>
+            <paper-button raised success on-tap="save">Enviar Comentário</paper-button>
           </div>
         </div>
     </div>
@@ -104,18 +104,47 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     class BibsisComentario extends Polymer.Element {
       static get is() { return 'bibsis-comentario'; }
 
+      save(event, detail, sender) {
+        console.log(this.formData.professor);
+        console.log(this.formData.rate);
+        console.log(this.formData.horario);
+        console.log(this.formData.comentario);
+        console.log(this.selected_disciplina);
+
+        new BibsisService().CriarDisciplina({data:"2018-06-14T23:01:52.991Z",titulo:"muito bom teste salvani",texto:"muito bom mesmo."}).then((r) => {
+	         console.log(r);
+         })
+      }
+
+      _itemSelected(e) {
+         var selectedItem = e.target.selectedItem;
+         if (selectedItem) {
+           this.selected_disciplina = selectedItem.innerText;
+         }
+       }
+
       static get properties() {
         return {
           disciplinas: {
             type: Array,
             value: []
-          }
+          },
+          formData: {
+           type: Object,
+           value: {}
+         },
+         selected_disciplina: {
+           type: String,
+           value: ""
+         },
         }
       }
 
       constructor () {
         super();
       }
+
+
 
       ready () {
         super.ready();
@@ -125,6 +154,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.disciplinas = resposta;
           }
         });
+
       }
     }
 
