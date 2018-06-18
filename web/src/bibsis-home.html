@@ -1,0 +1,59 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+
+<dom-module id="bibsis-home">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .button-holder {
+        margin: 16px;
+      }
+    </style>
+
+    <div class="card container">
+      <h1>BibSis</h1>
+
+      <p>Olá, futuro Engenheiro de Sistemas!</p>
+      <p>
+        Bem-vindo à plataforma BibSis, sua maior e melhor fonte de informações sobre o curso!</p>
+      <p>
+        Aqui você irá encontrar tudo que precisa para que seu percurso curricular seja o mais agradável possível.
+      </p>
+      <p>
+        Não se esqueça de nos ajudar a crescer. Juntos somos mais fortes!</p>
+      <div class="button-holder"><paper-button primary raised>Inscreva-se ou faça Login</paper-button>
+    </div>
+  </template>
+
+  <script>
+    class BibsisHome extends Polymer.Element {
+      static get is() { return 'bibsis-home'; }
+      static get properties() {
+        return {
+        };
+      }
+      ready() {
+        super.ready();
+      }
+    }
+    window.customElements.define(BibsisHome.is, BibsisHome);
+  </script>
+</dom-module>
