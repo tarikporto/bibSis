@@ -1,6 +1,7 @@
 var express = require("express"),
   app = express(),
   port = process.env.PORT || 3000,
+  cors = require("cors");
   mongoose = require("mongoose"),
   Usuario = require("./api/models/UsuarioModel"),
   Comentario = require("./api/models/ComentarioModel"),
@@ -13,6 +14,7 @@ var express = require("express"),
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/bibSisDB");
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -22,7 +24,7 @@ app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})
 });
 
-app.listen(3000);
+app.listen(port);
 
 console.log("bibSis RESTful API server started on: " + port);
 

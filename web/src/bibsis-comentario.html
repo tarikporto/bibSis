@@ -16,80 +16,85 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
 <link rel="import" href="../custom_components/card-comentario/card-comentario.html">
-<link rel="import" href="shared-styles.html">
+<link rel="import" href="../custom_components/rate-display/rate-display.html">
 
 <dom-module id="bibsis-comentario">
   <template>
-    <style include="shared-styles" is="custom-style">
+    <style include="shared-styles">
       :host {
         display: block;
-        padding: 10px;
       }
 
-      .my-button {
-        color: var(--paper-yellow-500);
-        height: 40px;
-        width: 40px;
-        padding: 1px;
+      .input-box {
+        padding: 8px 0;
       }
 
-      .my-button2 {
-        color: var(--paper-red-500);
-        height: 40px;
-        width: 40px;
-        padding: 1px;
+      .rate-box {
+        display: flex;
+        align-items: baseline;
+        margin-top: 12px;
       }
-      paper-dropdown-menu, paper-listbox {
-        width: 350px;
+
+      .rate-separator {
+        margin: 0 8px;
       }
+
+      .container{
+        padding: 0px 10px;
+      }
+
       paper-dropdown-menu {
-        height: 200px;
+        display: block;
+      }
+
+      .card {
+        margin: 24px;
+        padding: 16px;
+        color: #757575;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        min-height: 200px;
       }
 
     </style>
 
     <div class="card">
-      <div>
+      <div class="container">
         <h1>Adicionar comentário à Disciplina</h1>
-        <paper-dropdown-menu label="Disciplina">
-          <paper-listbox slot="dropdown-content">
-            <paper-item>Disciplina 1</paper-item>
-            <paper-item>Disciplina 2</paper-item>
-            <paper-item>Disciplina 3</paper-item>
-            <paper-item>Disciplina 4</paper-item>
-          </paper-listbox>
-        </paper-dropdown-menu>
-        <br>
-        Professor:<iron-autogrow-textarea></iron-autogrow-textarea><br><br>
-        <div style="float:left;">
-          Avaliação:
+        <div class="form-comentario">
+
+          <div class="input-box">
+            <paper-dropdown-menu label="Disciplina" horizontal-align="left" on-iron-select="_itemSelected">
+              <paper-listbox slot="dropdown-content">
+                <paper-item selected></paper-item>
+                <template is="dom-repeat" items="[[disciplinas]]">
+                  <paper-item value="[[item]]">[[item.nome]]</paper-item>
+                </template>
+              </paper-listbox>
+            </paper-dropdown-menu>
+          </div>
+          <div class="input-box">
+            <paper-input label="Professor" value="{{formData.professor}}" ></paper-input>
+          </div>
+          <div class="input-box rate-box">
+            <div class="input-label">
+              Avaliação:
+            </div>
+            <div class="rate-separator">
+              <rate-display rate="3"></rate-display>
+            </div>
+          </div>
+          <div class="input-box">
+            <paper-input label="Título" value="{{formData.titulo}}" ></paper-input>
+          </div>
+          <div class="input-box">
+            <paper-input type="textarea" label="Comentário" value="{{formData.comentario}}" ></paper-input>
+          </div>
+          <div class="input-box">
+            <paper-button raised success on-tap="_save">Enviar Comentário</paper-button>
+          </div>
         </div>
-        <div style="margin-left:10;">
-          <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
-        </div>
-        <div style="float:left;">
-          Dificuldade:
-        </div>
-        <div style="margin-left:10;">
-          <paper-icon-button icon="bibsis-icons-materia:plus" class="my-button2"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:plus" class="my-button2"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:plus" class="my-button2"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:plus-empty" class="my-button2"></paper-icon-button>
-          <paper-icon-button icon="bibsis-icons-materia:plus-empty" class="my-button2"></paper-icon-button>
-        </div>
-        Horário:<iron-autogrow-textarea></iron-autogrow-textarea><br><br>
-        Comentário:<iron-autogrow-textarea max-rows="4"></iron-autogrow-textarea><br><br>
-      <div><paper-icon-button icon="bibsis-icons-materia:noticia"></paper-icon-button>Notícia 1</div>
-      <div><paper-icon-button icon="bibsis-icons-materia:artigo"></paper-icon-button>Artigo 1</div>
-      <div><paper-icon-button icon="bibsis-icons-materia:imagem"></paper-icon-button>Imagem 1</div>
-      <div><paper-icon-button icon="bibsis-icons-materia:audio"></paper-icon-button>Áudio 1</div>
-      <div><paper-icon-button icon="bibsis-icons-materia:video"></paper-icon-button>Vídeo 1</div>
-      <div><paper-icon-button icon="bibsis-icons-materia:webpage"></paper-icon-button>Link 1</div>
-      <div><paper-icon-button icon="bibsis-icons-materia:livro"></paper-icon-button>Livro 1</div>
     </div>
 
   </template>
@@ -100,14 +105,75 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       static get properties() {
         return {
-          autor1: {
-            type: Object,
-            value: {
-              nome: "joão",
-              semestre: "6"
-            }
+          formData: {
+            type: Object
           }
+        };
+      }
+
+      _save() {
+        let service = new BibsisService();
+
+        let idUsuario;
+        if(BibsisUtil.localGet(BibsisUtil.constantes.LOGIN_DATA)) {
+          idUsuario = BibsisUtil.localGet(BibsisUtil.constantes.LOGIN_DATA).idUsuario;
+        } else {
+          service.BuscarUsuarioPorNomeUsuario("tarikporto").then((usuario) => {
+            idUsuario = usuario._id;
+          });
         }
+
+        service.CriarComentario({
+          titulo: this.formData.titulo,
+          texto: this.formData.comentario,
+          usuario_id: idUsuario,
+          avaliacao: this.formData.rate
+        }).then((comentario) => {
+          let disciplina = this.formData.disciplina;
+          disciplina.comentarios.push(comentario._id);
+          service.AtualizarDisciplina(disciplina);
+        });
+      }
+
+      _itemSelected(e) {
+         var selectedItem = e.target.selectedItem;
+         if (selectedItem) {
+           this.formData.disciplina = selectedItem.value;
+         }
+       }
+
+      static get properties() {
+        return {
+          disciplinas: {
+            type: Array,
+            value: []
+          },
+          formData: {
+           type: Object,
+           value: {}
+         },
+         selected_disciplina: {
+           type: String,
+           value: ""
+         },
+        }
+      }
+
+      constructor () {
+        super();
+      }
+
+
+
+      ready () {
+        super.ready();
+
+        new BibsisService().BuscarDisciplinas().then((resposta) => {
+          if(resposta) {
+            this.disciplinas = resposta;
+          }
+        });
+
       }
     }
 

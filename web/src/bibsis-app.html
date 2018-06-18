@@ -20,16 +20,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="bibsis-icons.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 
-<link rel="lazy-import" href="my-view1.html">
+<link rel="import" href="bibsis-icons.html">
+<link rel="import" href="bibsis-service.html">
+
 <link rel="lazy-import" href="bibsis-materia.html">
 <link rel="lazy-import" href="bibsis-comentario.html">
 <link rel="lazy-import" href="bibsis-favoritos.html">
-<link rel="lazy-import" href="my-view2.html">
+<link rel="lazy-import" href="bibsis-grade.html">
 <link rel="lazy-import" href="bibsis-home.html">
+<<<<<<< HEAD
 <link rel="lazy-import" href="my-view404.html">
 <link rel="lazy-import" href="bibsis-login.html">
+=======
+<link rel="lazy-import" href="bibsis-404.html">
+>>>>>>> a03437ababb20c268089b77be42b50b5f56d30f3
 
 <link rel="import" href="bibsis-util.html">
 <link rel="import" href="shared-styles.html">
@@ -40,6 +47,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       app-header {
         background-color: var(--paper-toolbar-background);
         color: #ffffff;
+      }
+
+      .drawer-link {
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .drawer-a {
+        color: unset;
+        text-decoration: unset;
+      }
+
+      .toolbar-content {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: baseline;
       }
     </style>
 
@@ -60,6 +84,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+<<<<<<< HEAD
           <a name="view1" href="[[rootPath]]view1">View One</a>
           <a name="view2" href="[[rootPath]]view2">View Two</a>
           <a name="home" href="[[rootPath]]home">Home</a>
@@ -68,6 +93,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <a name="comentario" href="[[rootPath]]comentario">Comentário</a>
           <a name="grade" href="[[rootPath]]grade">Grade</a>
           <a name="login" href="[[rootPath]]login">Matéria</a>
+=======
+          <paper-button class="drawer-link" link><a name="home" href="[[rootPath]]home">Home</a></paper-button>
+          <paper-button class="drawer-link" link><a name="grade" href="[[rootPath]]grade">Grade Curricular</a></paper-button>
+          <paper-button class="drawer-link" link><a name="comentario" href="[[rootPath]]comentario">Criar Comentário</a></paper-button>
+>>>>>>> a03437ababb20c268089b77be42b50b5f56d30f3
         </iron-selector>
       </app-drawer>
 
@@ -77,7 +107,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <app-header slot="header" condenses reveals effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="bibsis-icons:menu" drawer-toggle></paper-icon-button>
-            <div main-title>bibSis</div>
+            <div class="toolbar-content">
+              <div main-title>bibSis</div>
+              <div class="menu-holder">
+                <paper-button link on-tap="_homeLink">Home</paper-button>
+                <paper-button link on-tap="_gradeLink">Grade Curricular</paper-button>
+                <paper-button link on-tap="_comentarioLink">Criar Comentário</paper-button>
+              </div>
+              <div class="login-data">
+                <template is="dom-if" if="[[]]">
+
+                </template>
+              </div>
+            </div>
           </app-toolbar>
         </app-header>
 
@@ -87,8 +129,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             fallback-selection="404"
             role="main">
           <bibsis-home name="home"></bibsis-home>
+<<<<<<< HEAD
           <bibsis-materia name="materia"></bibsis-materia>
           <bibsis-login name="login"></bibsis-login>
+=======
+          <bibsis-materia name="materia" params="[[params]]"></bibsis-materia>
+>>>>>>> a03437ababb20c268089b77be42b50b5f56d30f3
           <bibsis-favoritos name="favoritos"></bibsis-favoritos>
           <bibsis-comentario name="comentario"></bibsis-comentario>
           <bibsis-grade name="grade"></bibsis-grade>
@@ -137,7 +183,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _redirect(page, params) {
         this.params = params;
-        this.page = page;
+        this.set("route.path", "/" + page);
       }
 
       _routePageChanged(page) {
@@ -163,6 +209,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _showPage404() {
         this.page = '404';
+      }
+
+      /* Event handlers */
+      _homeLink () {
+        BibsisUtil.redirect("home");
+      }
+
+      _gradeLink () {
+        BibsisUtil.redirect("grade");
+      }
+
+      _comentarioLink () {
+        BibsisUtil.redirect("comentario");
       }
     }
 

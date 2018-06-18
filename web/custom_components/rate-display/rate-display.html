@@ -1,18 +1,10 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../rate-display/rate-display.html">
 
-<dom-module id="card-comentario">
+<dom-module id="rate-display">
   <template>
     <style>
       :host {
         display: block;
-      }
-
-      .title-rate {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
       }
 
       .my-button {
@@ -29,53 +21,40 @@
         border-radius: 5px;
         background-color: #fff;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-        min-height: 100px;
+        min-height: 200px;
       }
 
+      iron-icon {
+        cursor: pointer;
+      }
     </style>
-
-    <div class="card">
-      <div class="title-rate">
-        <div>
-          <h3>[[title]]</h3>
-        </div>
-        <rate-display rate="[[rate]]" read-only></rate-display>
-      </div>
-      <div><h5>[[author]]</h5></div>
-      <div style="font-size: 11px;">[[text]]
-      </div>
+    <div>
+      <template id="stars" is="dom-repeat" items="[[starsArray]]">
+        <iron-icon icon="bibsis-icons-materia:star" class="my-button" id$="full-[[item]]" on-tap="buttonTap"></iron-icon>
+      </template>
+      <template id="emptyStars" is="dom-repeat" items="[[emptyArray]]">
+        <iron-icon icon="bibsis-icons-materia:empty-star" class="my-button" id$="empty-[[item]]" on-tap="buttonTap"></iron-icon>
+      </template>
     </div>
   </template>
 
   <script>
     /**
-     * `card-comentario`
+     * `testSilvana-element`
      *
      *
      * @customElement
      * @polymer
      * @demo demo/index.html
      */
-    class CardComentario extends Polymer.Element {
-      static get is() { return 'card-comentario'; }
+    class RateDisplay extends Polymer.Element {
+      static get is() { return 'rate-display'; }
       static get properties() {
         return {
-          title: {
-            type: String,
-            value: ""
-          },
           rate: {
             type: Number,
             value: 3,
             observer: "_computeArrays"
-          },
-          author: {
-            type: Object,
-            value: {}
-          },
-          text: {
-            type: String,
-            value: ""
           },
           starsArray: {
             type: Array,
@@ -84,19 +63,44 @@
           emptyArray: {
             type: Array,
             value: []
+          },
+          counter: {
+            type: Number,
+            value: 1
+          },
+          readOnly: {
+            type: Boolean,
+            value: false
           }
         };
       }
 
+      constructor() {
+        super();
+
+        this.buttonTap = (e, d) => {
+          if(this.readOnly) return;
+
+          let idSplit = e.currentTarget.id.split("-");
+
+          let curRate = this.rate;
+
+          if(idSplit[0] === "full") {
+            this.rate = parseInt(idSplit[1]) + 1;
+          } else {
+            this.rate = this.rate + parseInt(idSplit[1]) + 1;
+          }
+        }
+      }
+
       ready() {
         super.ready();
-
-        this.emptyStars = 5 - this.rate;
       }
 
       _computeArrays(value) {
         this.starsArray = [];
         this.emptyArray = [];
+        this.counter = 1;
 
         for(let i = 0; i < value; i++)
           this.push("starsArray", i);
@@ -104,8 +108,12 @@
         for(let i = 0; i < 5 - value; i++)
           this.push("emptyArray", i);
       }
+
+      get valor () {
+        return this.rate;
+      }
     }
 
-    window.customElements.define(CardComentario.is, CardComentario);
+    window.customElements.define(RateDisplay.is, RateDisplay);
   </script>
 </dom-module>

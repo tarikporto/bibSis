@@ -8,50 +8,41 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/paper-button/paper-button.html">
 
 
 <dom-module id="bibsis-home">
   <template>
     <style include="shared-styles">
       :host {
+        display: block;
+        padding: 10px;
       }
 
-      .inscreva-se-botao {
+      .container {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
       }
 
-      .textos {
-        display: flex;
-        flex-direction: column;
-      }
-      
-      .container {
-        background-image: url("images/student-network.png");
-      }
-
-      h1 {
-        align-self: center;
-      }
-      
-      h2 {
-        align-self: center;
+      .button-holder {
+        margin: 16px;
       }
 
     </style>
 
-    <div class="container">
-      <div class="textos">
-        <h1>Olá</h1>
-        <h2>Bibsis é uma ferramenta...</h2>
-      </div>
-      <div class="inscreva-se-botao">
-        <paper-button on-tap="_onclickBotao" raised primary>Inscreva-se!</paper-button>
-      </div>
-    </div>
+    <div class="card container">
+      <h1>BibSis</h1>
 
+      <p>Olá, futuro Engenheiro de Sistemas!</p>
+      <p>
+        Bem-vindo à plataforma BibSis, sua maior e melhor fonte de informações sobre o curso!</p>
+      <p>
+        Aqui você irá encontrar tudo que precisa para que seu percurso curricular seja o mais agradável possível.
+      </p>
+      <p>
+        Não se esqueça de nos ajudar a crescer. Juntos somos mais fortes!</p>
+      <div class="button-holder"><paper-button primary raised>Inscreva-se ou faça Login</paper-button>
+    </div>
   </template>
 
   <script>
@@ -60,19 +51,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       static get properties() {
         return {
-          locura: {
-            type: String,
-            value: "Tarik"
-          }
+
         };
       }
 
       ready() {
         super.ready();
-      }
-
-      _onclickBotao() {
-        alert("botão!");
       }
     }
 

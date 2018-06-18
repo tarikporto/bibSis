@@ -7,14 +7,13 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-
-<link rel="import" href="shared-styles.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../custom_components/card-lista-disciplina/card-lista-disciplina.html">
 
 <dom-module id="bibsis-grade">
   <template>
-    <style include="shared-styles" is="custom-style">
+    <style include="shared-styles">
         :host {
             display: block;
         }
@@ -26,6 +25,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-icon-button slot="prefix" icon="bibsis-icons:search" value="{{valorBusca}}"></paper-icon-button>
             </paper-input>
         </div>
+    </div>
+
+    <div class="card">
+      <div class="lista-disciplinas">
+        <template is="dom-repeat" items="[[disciplinas]]" as="disciplina">
+          <card-lista-disciplina disciplina="[[disciplina]]"></card-lista-disciplina>
+        </template>
+      </div>
     </div>
 
   </template>
@@ -40,12 +47,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             type: String,
             value: "",
             observer: "_buscaDisciplinas"
+          },
+          disciplinas: {
+            type: Array,
+            value: []
           }
         }
       }
 
       _buscaDisciplinas () {
-        
+        new BibsisService().BuscarDisciplinas().then((response) => {
+          this.set("disciplinas", response);
+        });
       }
     }
 

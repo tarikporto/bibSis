@@ -7,6 +7,9 @@ module.exports = function (app) {
     .get(bibSis.listarComentarios)
     .post(bibSis.criarComentario);
 
+  /*app.route("/comentarioMaisRecente")
+    .get(bibSis.listarComentarioMaisRecente);*/
+
   app.route("/comentarios/query")
     .get(bibSis.buscarComentarios);
 

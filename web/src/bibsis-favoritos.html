@@ -11,7 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../custom_components/card-comentario/card-comentario.html">
+<link rel="import" href="../custom_components/card-favorito/card-favorito.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="bibsis-favoritos">
@@ -43,24 +43,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <div class="card" style="width:80%;float:left">
       <div>
-        <div style="width:50%;float:left; padding-bottom:20px">
+        <div style="width:50%;float:left">
           <h1>Favoritos</h1>
           <h4>Comentários e novidades sobre suas matérias favoritas</h4>
         </div>
-        <card-comentario title="Materia 1" rate="2" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
-          Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
-          nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
-        <card-comentario title="Comentário 2" rate="4" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
-          Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
-          nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
-        <card-comentario title="Comentário 3" rate="1" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
-          Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
-          nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
-        <card-comentario title="Comentário 4" rate="5" author="{{autor1}}" text="Ut labores minimum atomorum pro. Laudem tibique ut has.
-          Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
-          nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit."></card-comentario>
+        <div style="padding-top:80px;">
+          <template is="dom-repeat" items="[[disciplinas]]">
+          <card-favorito title=[[item.nome]] rate=[[iitem.avaliacao]] author==[[item.comentarios[0]]] text="Ut labores minimum atomorum pro. Laudem tibique ut has.
+            Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
+            nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit." materiais="material1, material2"></card-favorito>
+        </template>
+        </div>
       </div>
-
     </div>
 
   </template>
@@ -71,14 +65,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       static get properties() {
         return {
-          autor1: {
-            type: Object,
-            value: {
-              nome: "joão",
-              semestre: "6"
-            }
-          }
+          disciplinas: {
+            type: Array,
+            value: []
+          },
         }
+      }
+
+      constructor () {
+        super();
+      }
+
+      ready () {
+        super.ready();
+
+        new BibsisService().BuscarDisciplinas().then((resposta) => {
+          if(resposta) {
+            this.disciplinas = resposta;
+            console.log(resposta);
+          }
+        });
       }
     }
 

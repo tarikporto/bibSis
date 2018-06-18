@@ -51,7 +51,7 @@
       <div><h5>[[author.nome]] - [[author.semestre]]</h5></div>
       <div style="font-size: 11px;">[[text]]
       </div>
-      <div style="font-size: 11px;">[[materiais]]
+      <div style="font-size: 11px;"><h5>[[materiais]]</h5>
       </div>
       <paper-button>Leia Mais</paper-button>
 
@@ -67,8 +67,8 @@
      * @polymer
      * @demo demo/index.html
      */
-    class CardComentario extends Polymer.Element {
-      static get is() { return 'card-comentario'; }
+    class CardFavorito extends Polymer.Element {
+      static get is() { return 'card-favorito'; }
       static get properties() {
         return {
           title: {
@@ -85,6 +85,10 @@
             value: {}
           },
           text: {
+            type: String,
+            value: ""
+          },
+          materiais: {
             type: String,
             value: ""
           },
@@ -117,6 +121,6 @@
       }
     }
 
-    window.customElements.define(CardComentario.is, CardComentario);
+    window.customElements.define(CardFavorito.is, CardFavorito);
   </script>
 </dom-module>
