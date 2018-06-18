@@ -132,7 +132,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           disciplina.comentarios.push(comentario._id);
           service.AtualizarDisciplina(disciplina);
         }).then(() =>{
-          BibsisUtil.redirect("materia");
+            BibsisUtil.redirect("materia", {nomeDisciplina: this.formData.disciplina})
         });
       }
 

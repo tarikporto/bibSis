@@ -53,7 +53,7 @@
       </div>
       <div style="font-size: 11px;"><h5>[[materiais]]</h5>
       </div>
-      <paper-button>Leia Mais</paper-button>
+      <paper-button on-tap= on-click="_openDisciplina">Leia Mais</paper-button>
 
     </div>
   </template>
@@ -107,6 +107,10 @@
         super.ready();
 
         this.emptyStars = 5 - this.rate;
+      }
+
+      _openDisciplina() {
+        BibsisUtil.redirect("materia", { nomeDisciplina: this.title })
       }
 
       _computeArrays(value) {
