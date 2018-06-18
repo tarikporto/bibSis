@@ -17,7 +17,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
 <link rel="import" href="../custom_components/card-comentario/card-comentario.html">
 <link rel="import" href="../custom_components/rate-display/rate-display.html">
-
+<link rel="import" href="bibsis-util.html">
 <dom-module id="bibsis-comentario">
   <template>
     <style include="shared-styles">
@@ -82,7 +82,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               Avaliação:
             </div>
             <div class="rate-separator">
-              <rate-display rate="3"></rate-display>
+              <rate-display id="avaliacao" rate="3"></rate-display>
             </div>
           </div>
           <div class="input-box">
@@ -113,7 +113,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _save() {
         let service = new BibsisService();
-
+        console.log(this.$.avaliacao.rate);
         let idUsuario;
         if(BibsisUtil.localGet(BibsisUtil.constantes.LOGIN_DATA)) {
           idUsuario = BibsisUtil.localGet(BibsisUtil.constantes.LOGIN_DATA).idUsuario;
@@ -122,16 +122,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             idUsuario = usuario._id;
           });
         }
-
         service.CriarComentario({
           titulo: this.formData.titulo,
           texto: this.formData.comentario,
           usuario_id: idUsuario,
-          avaliacao: this.formData.rate
+          avaliacao:this.$.avaliacao.rate
         }).then((comentario) => {
           let disciplina = this.formData.disciplina;
           disciplina.comentarios.push(comentario._id);
           service.AtualizarDisciplina(disciplina);
+        }).then(() =>{
+          BibsisUtil.redirect("materia");
         });
       }
 

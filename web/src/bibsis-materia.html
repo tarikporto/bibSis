@@ -60,7 +60,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <rate-display rate="[[disciplina.avaliacao]]" read-only></rate-display>
           </div>
           <template is="dom-repeat" items="[[comentarios]]">
-            <card-comentario title="[[item.titulo]]" rate="4" author="[[item.usuarioNome]]" text="[[item.texto]]"></card-comentario>
+            <card-comentario title="[[item.titulo]]" rate="[[item.avaliacao]]"  author="[[item.usuarioNome]]" text="[[item.texto]]"></card-comentario>
           </template>
         </div>
 
