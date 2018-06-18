@@ -23,9 +23,6 @@
       <iron-ajax id="buscarComentarioPorId" url="{{url}}/comentarios/[[query.id]]"
       handle-as="json" method="GET" content-type="application/json" headers="{{headers}}"></iron-ajax>
 
-      <iron-ajax id="buscarComentarioMaisRecente" url="{{url}}/comentarioMaisRecente/"
-      handle-as="json" method="GET" content-type="application/json" headers="{{headers}}"></iron-ajax>
-
       <iron-ajax id="buscarComentarios" url="{{url}}/comentarios"
       handle-as="json" method="GET" content-type="application/json" headers="{{headers}}"></iron-ajax>
 
@@ -138,16 +135,6 @@
                         this.MostrarMensagemErro("Erro");
                     });
             }
-
-            /*BuscarComentarioMaisRecente() {
-                return this.ObterPromessa(this.$.buscarComentarioMaisRecente.generateRequest())
-                    .then((resposta) => {
-                        return resposta[0].response;
-                    })
-                    .catch(() => {
-                        this.MostrarMensagemErro("Erro");
-                    });
-            }*/
 
             BuscarDisciplinasPorNome (nome) {
                 this.set("query.nome", nome);

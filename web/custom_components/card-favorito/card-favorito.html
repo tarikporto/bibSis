@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../rate-display/rate-display.html">
 
 <dom-module id="card-favorito">
   <template>
@@ -40,20 +41,16 @@
           <h3>[[title]]</h3>
         </div>
         <div>
-          <template id="stars" is="dom-repeat" items="[[starsArray]]">
-            <paper-icon-button icon="bibsis-icons-materia:star" class="my-button"></paper-icon-button>
-          </template>
-          <template id="emptyStars" is="dom-repeat" items="[[emptyArray]]">
-            <paper-icon-button icon="bibsis-icons-materia:empty-star" class="my-button"></paper-icon-button>
-          </template>
+          <rate-display rate="[[avaliacao]]" read-only></rate-display>
         </div>
       </div>
-      <div><h5>[[author.nome]] - [[author.semestre]]</h5></div>
-      <div style="font-size: 11px;">[[text]]
+      <div><h4>Novidades:</h4></div>
+      <div><h5>[[comentario.titulo]]</h5></div>
+      <div style="font-size: 11px;">[[comentario.texto]]
       </div>
       <div style="font-size: 11px;"><h5>[[materiais]]</h5>
       </div>
-      <paper-button on-tap= on-click="_openDisciplina">Leia Mais</paper-button>
+      <paper-button on-tap="_openDisciplina">Leia Mais</paper-button>
 
     </div>
   </template>
@@ -75,42 +72,33 @@
             type: String,
             value: ""
           },
-          rate: {
-            type: Number,
-            value: 3,
-            observer: "_computeArrays"
-          },
-          author: {
+          comentario: {
             type: Object,
             value: {}
           },
-          text: {
-            type: String,
-            value: ""
+          comentarios: {
+            type: Array,
+            value: []
           },
           materiais: {
             type: String,
             value: ""
           },
-          starsArray: {
-            type: Array,
-            value: []
-          },
-          emptyArray: {
-            type: Array,
-            value: []
-          }
         };
       }
 
       ready() {
+        console.log("entrando");
         super.ready();
-
-        this.emptyStars = 5 - this.rate;
+        this._getComment();
       }
 
-      _openDisciplina() {
-        BibsisUtil.redirect("materia", { nomeDisciplina: this.title })
+      _getComment() {
+        let service = new BibsisService();
+        service.BuscarComentarioPorId(this.comentarios[this.comentarios.length-1]).then((comentario) => {
+          this.comentario = comentario;
+          console.log(comentario);
+        });
       }
 
       _computeArrays(value) {
@@ -122,6 +110,10 @@
 
         for(let i = 0; i < 5 - value; i++)
           this.push("emptyArray", i);
+      }
+
+      _openDisciplina() {
+        BibsisUtil.redirect("materia", { nomeDisciplina: this.title })
       }
     }
 
