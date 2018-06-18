@@ -29,6 +29,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="lazy-import" href="my-view2.html">
 <link rel="lazy-import" href="bibsis-home.html">
 <link rel="lazy-import" href="my-view404.html">
+<link rel="lazy-import" href="bibsis-login.html">
 
 <link rel="import" href="bibsis-util.html">
 <link rel="import" href="shared-styles.html">
@@ -62,10 +63,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <a name="view1" href="[[rootPath]]view1">View One</a>
           <a name="view2" href="[[rootPath]]view2">View Two</a>
           <a name="home" href="[[rootPath]]home">Home</a>
-            <a name="materia" href="[[rootPath]]materia">Matéria</a>
-            <a name="favoritos" href="[[rootPath]]favoritos">Favoritos</a>
+          <a name="materia" href="[[rootPath]]materia">Matéria</a>
+          <a name="favoritos" href="[[rootPath]]favoritos">Favoritos</a>
           <a name="comentario" href="[[rootPath]]comentario">Comentário</a>
           <a name="grade" href="[[rootPath]]grade">Grade</a>
+          <a name="login" href="[[rootPath]]login">Matéria</a>
         </iron-selector>
       </app-drawer>
 
@@ -86,6 +88,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             role="main">
           <bibsis-home name="home"></bibsis-home>
           <bibsis-materia name="materia"></bibsis-materia>
+          <bibsis-login name="login"></bibsis-login>
           <bibsis-favoritos name="favoritos"></bibsis-favoritos>
           <bibsis-comentario name="comentario"></bibsis-comentario>
           <bibsis-grade name="grade"></bibsis-grade>

@@ -1,0 +1,92 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-iconset-svg/iron-iconset-svg.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="bibsis-login">
+  <template>
+    <style include="shared-styles" is="custom-style">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+
+      .my-button {
+        color: var(--paper-yellow-500);
+        height: 40px;
+        width: 40px;
+        padding: 1px;
+      }
+
+      .container {
+        display: flex;
+      }
+
+      .card {
+        margin: auto;
+        width: 60%;
+        padding: 16px;
+        color: #757575;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        min-height: 200px;
+      }
+    </style>
+    <div class="container">
+      <div class="card">
+        <div>
+          <div style="width:50% margin:auto">
+            <h1 align="center">Log in</h1>
+          </div>
+          <div style="width:50% margin:auto">
+            <form method="get" action="/form/handler">
+              <div style="margin:auto; width:50%">
+                <paper-input label="Nome de usuario" style="text-align:center" no-label-float>
+                  <iron-icon icon="mail" slot="prefix"></iron-icon>
+                </paper-input>
+              </div>
+                <div style="margin:auto; width:50%">
+                  <paper-input label="Senha" style="text-align:center" type="password" no-label-float>
+                    <iron-icon icon="icons:lock" slot="prefix"></iron-icon>
+                  </paper-input>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+  </template>
+
+  <script>
+    class BibsisLogin extends Polymer.Element {
+      static get is() { return 'bibsis-login'; }
+
+      static get properties() {
+        return {
+          autor1: {
+            type: Object,
+            value: {
+              nome: "joão",
+              semestre: "6"
+            }
+          }
+        }
+      }
+    }
+
+    window.customElements.define(BibsisLogin.is, BibsisLogin);
+  </script>
+</dom-module>
