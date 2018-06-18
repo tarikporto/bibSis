@@ -87,13 +87,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           autor1: {
             type: Object,
             value: {
-              nome: "joão",
-              semestre: "6"
+              nome: "",
+              semestre: ""
             }
           },
           nomeDisciplina: {
             type: String,
-            value: "Laboratório de Projeto III",
+            value: "",
             observer: "_nomeDisciplinaChanged"
           },
           disciplina: {
@@ -129,7 +129,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                });
              });
            }
-
+           console.log(rateSum);
+           console.log(rateCount);
+           console.log(Math.floor(rateSum/rateCount));
            this.set("disciplina.avaliacao", Math.floor(rateSum/rateCount));
            service.AtualizarDisciplina(this.disciplina);
 

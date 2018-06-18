@@ -43,15 +43,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <div class="card" style="width:80%;float:left">
       <div>
-        <div style="width:50%;float:left">
+        <div style="width:70%;float:left">
           <h1>Favoritos</h1>
           <h4>Comentários e novidades sobre suas matérias favoritas</h4>
         </div>
-        <div style="padding-top:80px;">
+        <div style="padding-top:130px;">
           <template is="dom-repeat" items="[[disciplinas]]">
-          <card-favorito title=[[item.nome]] rate=[[iitem.avaliacao]] author==[[item.comentarios[0]]] text="Ut labores minimum atomorum pro. Laudem tibique ut has.
-            Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam
-            nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit." materiais="material1, material2"></card-favorito>
+          <card-favorito title=[[item.nome]] rate=[[item.avaliacao]] author=[[item.comentarios]] text=[[item.comentarios[0].texto]] materiais=[[item.documentos]]></card-favorito>
         </template>
         </div>
       </div>
@@ -82,6 +80,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         new BibsisService().BuscarDisciplinas().then((resposta) => {
           if(resposta) {
             this.disciplinas = resposta;
+            console.log(resposta);
           }
         });
       }
