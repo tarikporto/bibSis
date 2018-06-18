@@ -12,7 +12,8 @@ var ComentarioSchema = new Schema({
   data: {
     type: Date,
     default: Date.now
-  }
+  },
+  avaliacao: Number
 });
 
 module.exports = mongoose.model("Comentario", ComentarioSchema);

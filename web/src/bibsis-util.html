@@ -14,6 +14,24 @@
         }));
       }
 
+      static localSave (key, value) {
+        localStorage.setItem(key, value);
+      }
+
+      static localGet (key) {
+        return localStorage[key];
+      }
+
+      static localDelete (key) {
+        localStorage.removeItem(key);
+      }
+
+      static get constantes() {
+        return {
+          "LOGIN_DATA": "LOGIN_DATA"
+        };
+      }
+
     }
 
     window.customElements.define(BibsisUtil.is, BibsisUtil);

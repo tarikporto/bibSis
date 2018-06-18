@@ -21,6 +21,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
 <link rel="import" href="bibsis-icons.html">
 <link rel="import" href="bibsis-service.html">
 
@@ -96,7 +98,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-button link on-tap="_gradeLink">Grade Curricular</paper-button>
                 <paper-button link on-tap="_comentarioLink">Criar Comentário</paper-button>
               </div>
-              <div class="login-data"></div>
+              <div class="login-data">
+                <template is="dom-if" if="[[]]">
+
+                </template>
+              </div>
             </div>
           </app-toolbar>
         </app-header>
@@ -107,7 +113,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             fallback-selection="404"
             role="main">
           <bibsis-home name="home"></bibsis-home>
-          <bibsis-materia name="materia"></bibsis-materia>
+          <bibsis-materia name="materia" params="[[params]]"></bibsis-materia>
           <bibsis-favoritos name="favoritos"></bibsis-favoritos>
           <bibsis-comentario name="comentario"></bibsis-comentario>
           <bibsis-grade name="grade"></bibsis-grade>

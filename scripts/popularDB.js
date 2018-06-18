@@ -57,43 +57,50 @@ sd.save();
 var coment1 = new Comentario({
   titulo: "muito bom",
   texto: "muito bom mesmo.",
-  usuarioFonte: andre._id
+  avaliacao: 4,
+  usuario_id: andre._id
 });
 
 var coment2 = new Comentario({
   titulo: "muito bom",
   texto: "muito bom mesmo.",
-  usuarioFonte: carlos._id
+  avaliacao: 3,
+  usuario_id: carlos._id
 });
 
 var coment3 = new Comentario({
   titulo: "muito bom",
   texto: "muito bom mesmo.",
-  usuarioFonte: tarik._id
+  avaliacao: 4,
+  usuario_id: tarik._id
 });
 
 var coment4 = new Comentario({
   titulo: "muito bom",
   texto: "muito bom mesmo.",
-  usuarioFonte: silvana._id
+  avaliacao: 2,
+  usuario_id: silvana._id
 });
 
 var coment5 = new Comentario({
   titulo: "muito bom",
   texto: "muito bom mesmo.",
-  usuarioFonte: pedro._id
+  avaliacao: 4,
+  usuario_id: pedro._id
 });
 
 var coment6 = new Comentario({
   titulo: "muito bom",
   texto: "muito bom mesmo.",
-  usuarioFonte: tarik._id
+  avaliacao: 3,
+  usuario_id: tarik._id
 });
 
 var coment7 = new Comentario({
   titulo: "muito bom",
   texto: "muito bom mesmo.",
-  usuarioFonte: sd._id
+  avaliacao: 5,
+  usuario_id: sd._id
 });
 
 coment1.save();
@@ -168,7 +175,7 @@ var disciplina1 = new Disciplina({
 
 var disciplina2 = new Disciplina({
   codigo: "ELE083",
-  nome: "Computação Evolucionárioa",
+  nome: "Computação Evolucionária",
   semestre: 7,
   comentarios: [coment6._id],
   professores: ["Ricardo"],

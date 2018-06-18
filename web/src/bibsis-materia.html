@@ -57,10 +57,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <div>
               <h1>[[nomeDisciplina]]</h1>
             </div>
-            <rate-display rate="[[disciplina.dificuldade]]" read-only></rate-display>
+            <rate-display rate="[[disciplina.avaliacao]]" read-only></rate-display>
           </div>
           <template is="dom-repeat" items="[[comentarios]]">
-            <card-comentario title="[[item.titulo]]" rate="4" author="{{autor1}}" text="[[item.texto]]"></card-comentario>
+            <card-comentario title="[[item.titulo]]" rate="4" author="[[item.usuarioNome]]" text="[[item.texto]]"></card-comentario>
           </template>
         </div>
 
@@ -102,22 +102,44 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           comentarios: {
             type: Array,
             value: []
+          },
+          params: {
+            type: Object,
+            observer: "_paramsChanged"
           }
         }
       }
 
       _nomeDisciplinaChanged (val) {
-        new BibsisService().BuscarDisciplinasPorNome(val).then((resposta)=>{
+        let service = new BibsisService();
+        let rateCount = 0;
+        let rateSum = 0;
+
+        service.BuscarDisciplinasPorNome(val).then((resposta)=>{
 	         this.set("disciplina", resposta[0]);
 
            var comentariosArray = [];
            for(let i = 0; i < this.disciplina.comentarios.length; i++) {
-             new BibsisService().BuscarComentarioPorId(this.disciplina.comentarios[i]).then((r) => {
-               this.push("comentarios",r);
+             service.BuscarComentarioPorId(this.disciplina.comentarios[i]).then((r) => {
+               service.BuscarUsuarioPorId(r.usuario_id).then((autor) => {
+                 r.usuarioNome = autor.nome;
+                 rateCount++;
+                 rateSum += r.avaliacao;
+                 this.push("comentarios",r);
+               });
              });
            }
 
+           this.set("disciplina.avaliacao", Math.floor(rateSum/rateCount));
+           service.AtualizarDisciplina(this.disciplina);
+
         })
+      }
+
+      _paramsChanged (params) {
+        if(params && params.nomeDisciplina) {
+          this.set("nomeDisciplina", params.nomeDisciplina);
+        }
       }
     }
 

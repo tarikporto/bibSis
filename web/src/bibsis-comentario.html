@@ -10,7 +10,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/neon-animation/web-animations.html">
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
-<link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
@@ -70,7 +69,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <paper-listbox slot="dropdown-content">
                 <paper-item selected></paper-item>
                 <template is="dom-repeat" items="[[disciplinas]]">
-                  <paper-item>[[item.nome]]</paper-item>
+                  <paper-item value="[[item]]">[[item.nome]]</paper-item>
                 </template>
               </paper-listbox>
             </paper-dropdown-menu>
@@ -87,13 +86,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </div>
           </div>
           <div class="input-box">
-            <paper-input label="Horário" value="{{formData.horario}}" ></paper-input>
+            <paper-input label="Título" value="{{formData.titulo}}" ></paper-input>
           </div>
           <div class="input-box">
-            <paper-input label="Comentário" value="{{formData.comentario}}" ></paper-input>
+            <paper-input type="textarea" label="Comentário" value="{{formData.comentario}}" ></paper-input>
           </div>
           <div class="input-box">
-            <paper-button raised success on-tap="save">Enviar Comentário</paper-button>
+            <paper-button raised success on-tap="_save">Enviar Comentário</paper-button>
           </div>
         </div>
     </div>
@@ -104,22 +103,42 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     class BibsisComentario extends Polymer.Element {
       static get is() { return 'bibsis-comentario'; }
 
-      save(event, detail, sender) {
-        console.log(this.formData.professor);
-        console.log(this.formData.rate);
-        console.log(this.formData.horario);
-        console.log(this.formData.comentario);
-        console.log(this.selected_disciplina);
+      static get properties() {
+        return {
+          formData: {
+            type: Object
+          }
+        };
+      }
 
-        new BibsisService().CriarDisciplina({data:"2018-06-14T23:01:52.991Z",titulo:"muito bom teste salvani",texto:"muito bom mesmo."}).then((r) => {
-	         console.log(r);
-         })
+      _save() {
+        let service = new BibsisService();
+
+        let idUsuario;
+        if(BibsisUtil.localGet(BibsisUtil.constantes.LOGIN_DATA)) {
+          idUsuario = BibsisUtil.localGet(BibsisUtil.constantes.LOGIN_DATA).idUsuario;
+        } else {
+          service.BuscarUsuarioPorNomeUsuario("tarikporto").then((usuario) => {
+            idUsuario = usuario._id;
+          });
+        }
+
+        service.CriarComentario({
+          titulo: this.formData.titulo,
+          texto: this.formData.comentario,
+          usuario_id: idUsuario,
+          avaliacao: this.formData.rate
+        }).then((comentario) => {
+          let disciplina = this.formData.disciplina;
+          disciplina.comentarios.push(comentario._id);
+          service.AtualizarDisciplina(disciplina);
+        });
       }
 
       _itemSelected(e) {
          var selectedItem = e.target.selectedItem;
          if (selectedItem) {
-           this.selected_disciplina = selectedItem.innerText;
+           this.formData.disciplina = selectedItem.value;
          }
        }
 
