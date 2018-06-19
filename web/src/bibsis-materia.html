@@ -40,6 +40,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         align-items: baseline;
       }
 
+      .rate-and-fav {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .nome-materia-texto {
+        flex: 3;
+      }
+
       .card {
         margin: 24px;
         padding: 16px;
@@ -54,13 +65,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <div class="card" style="flex:2">
         <div>
           <div class="nome-materia-container">
-            <div>
+            <div class="nome-materia-texto">
               <h1>[[nomeDisciplina]]</h1>
             </div>
-            <rate-display rate="[[disciplina.avaliacao]]" read-only></rate-display>
+            <div class="rate-and-fav">
+              <rate-display rate="[[disciplina.avaliacao]]" read-only></rate-display>
+              <paper-button  raised id="botaoFavorito" on-tap="_favoritarToggle">[[favoritar]]</paper-button>
+            </div>
           </div>
           <template is="dom-repeat" items="[[comentarios]]">
-            <card-comentario title="[[item.titulo]]" rate="[[item.avaliacao]]"  author="[[item.usuarioNome]]" text="[[item.texto]]"></card-comentario>
+            <card-comentario title="[[item.titulo]]" rate="[[item.avaliacao]]" author="[[item.usuarioNome]]" text="[[item.texto]]"></card-comentario>
           </template>
         </div>
 
@@ -93,11 +107,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           },
           nomeDisciplina: {
             type: String,
-            value: "",
             observer: "_nomeDisciplinaChanged"
           },
           disciplina: {
-            type: Object
+            type: Object,
+            observer: "_disciplinaChanged"
           },
           comentarios: {
             type: Array,
@@ -106,6 +120,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           params: {
             type: Object,
             observer: "_paramsChanged"
+          },
+          rate: {
+            type: Number,
+            observer: "_rateChanged"
+          },
+          favoritar: {
+            type: String,
+            value: "FAVORITAR"
           }
         }
       }
@@ -118,30 +140,71 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         service.BuscarDisciplinasPorNome(val).then((resposta)=>{
 	         this.set("disciplina", resposta[0]);
 
-           var comentariosArray = [];
+           this.splice("comentarios", 0, this.comentarios.length)
            for(let i = 0; i < this.disciplina.comentarios.length; i++) {
              service.BuscarComentarioPorId(this.disciplina.comentarios[i]).then((r) => {
+               if(!r) return;
                service.BuscarUsuarioPorId(r.usuario_id).then((autor) => {
                  r.usuarioNome = autor.nome;
                  rateCount++;
                  rateSum += r.avaliacao;
+                 this.set("rate", Math.floor(rateSum/rateCount));
                  this.push("comentarios",r);
                });
              });
            }
-           console.log(rateSum);
-           console.log(rateCount);
-           console.log(Math.floor(rateSum/rateCount));
-           this.set("disciplina.avaliacao", Math.floor(rateSum/rateCount));
-           service.AtualizarDisciplina(this.disciplina);
-
-        })
+        });
       }
 
       _paramsChanged (params) {
         if(params && params.nomeDisciplina) {
           this.set("nomeDisciplina", params.nomeDisciplina);
         }
+      }
+
+      _rateChanged (val) {
+          this._debounceJob = Polymer.Debouncer.debounce(this._debounceJob, Polymer.Async.timeOut.after(300) ,() => {
+            this.set("disciplina.avaliacao", val);
+            new BibsisService().AtualizarDisciplina(this.disciplina);
+          });
+      }
+
+      _favoritarToggle() {
+
+        let usuario = BibsisUtil.localGet(BibsisUtil.constantes.LOGIN_DATA);
+
+        if(this.$.botaoFavorito.innerText == "FAVORITAR") {
+          this.set("favoritar", "FAVORITADO");
+          this.$.botaoFavorito.classList.add("success");
+
+          if(!usuario.favoritos) usuario.favoritos = [];
+          usuario.favoritos.push(this.disciplina._id);
+          this.salvarUsuario(usuario);
+        } else {
+          this.set("favoritar", "FAVORITAR");
+          this.$.botaoFavorito.classList.remove("success");
+
+          usuario.favoritos = usuario.favoritos.filter(item => item !== this.disciplina._id);
+          this.salvarUsuario(usuario);
+        }
+      }
+
+      _disciplinaChanged() {
+        let usuario = BibsisUtil.localGet(BibsisUtil.constantes.LOGIN_DATA);
+        if(usuario && usuario.favoritos.includes(this.disciplina._id)) {
+          this.set("favoritar", "FAVORITADO");
+          this.$.botaoFavorito.classList.add("success");
+        } else {
+          this.set("favoritar", "FAVORITAR");
+          this.$.botaoFavorito.classList.remove("success");
+        }
+      }
+
+      salvarUsuario(usuario) {
+        let service = new BibsisService();
+        service.AtualizarUsuario(usuario).then((usuario) => {
+          BibsisUtil.localSave(BibsisUtil.constantes.LOGIN_DATA, usuario);
+        });
       }
     }
 

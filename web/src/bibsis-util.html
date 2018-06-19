@@ -15,11 +15,11 @@
       }
 
       static localSave (key, value) {
-        localStorage.setItem(key, value);
+        localStorage.setItem(key, JSON.stringify(value));
       }
 
       static localGet (key) {
-        return localStorage[key];
+        return JSON.parse(localStorage.getItem(key));
       }
 
       static localDelete (key) {

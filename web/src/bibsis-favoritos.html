@@ -76,12 +76,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       ready () {
         super.ready();
-        new BibsisService().BuscarDisciplinas().then((resposta) => {
-          if(resposta) {
-            this.disciplinas = resposta;
-            console.log(resposta);
+
+        this.carregarDisciplinasFavoritas();
+        addEventListener("page.changed", (e) => {
+          if(e.detail.page == "favoritos") {
+            this.carregarDisciplinasFavoritas();
           }
         });
+      }
+
+      carregarDisciplinasFavoritas () {
+        this.splice("disciplinas", 0, this.disciplinas.length);
+        let usuario = BibsisUtil.localGet(BibsisUtil.constantes.LOGIN_DATA);
+        for(let disciplinaId of usuario.favoritos) {
+          new BibsisService().BuscarDisciplinasPorId(disciplinaId).then((resposta) => {
+            if(resposta) {
+              this.push("disciplinas", resposta);
+            }
+          });
+        }
       }
     }
 

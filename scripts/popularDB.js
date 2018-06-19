@@ -17,127 +17,152 @@ mongoose.connect("mongodb://localhost/bibSisDB");
 // adiciona os usuários no DB
 var tarik = new Usuario({
   nomeUsuario: "tarikporto",
-  nome: "Tarik Porto"
+  nome: "Tarik Porto",
+  favoritos: []
 });
 
 var andre = new Usuario({
   nomeUsuario: "andrelopes",
-  nome: "André Lopes"
+  nome: "André Lopes",
+  favoritos: []
 });
 
 var carlos = new Usuario({
   nomeUsuario: "carlosjoviano",
-  nome: "Carlos Joviano"
+  nome: "Carlos Joviano",
+  favoritos: []
 });
 
 var silvana = new Usuario({
   nomeUsuario: "silvanaribeiro",
-  nome: "Silvana Ribeiro"
+  nome: "Silvana Ribeiro",
+  favoritos: []
 });
 
 var sd = new Usuario({
   nomeUsuario: "sdcarlosramos",
-  nome: "Carlos Ramos"
+  nome: "Carlos Ramos",
+  favoritos: []
 });
 
 var pedro = new Usuario({
   nomeUsuario: "pedrovinicius",
-  nome: "Pedro Vinicius"
+  nome: "Pedro Vinicius",
+  favoritos: []
 });
 
 var arthursilva = new Usuario({
   nomeUsuario: "arthursilva",
-  nome: "Arthur Silva"
+  nome: "Arthur Silva",
+  favoritos: []
 });
 
 var robertojunior = new Usuario({
   nomeUsuario: "robertojunior",
-  nome: "Roberto Junior"
+  nome: "Roberto Junior",
+  favoritos: []
 });
 
 var guilhermesilva = new Usuario({
   nomeUsuario: "guilhermesilva",
-  nome: "Guilherme Silva"
+  nome: "Guilherme Silva",
+  favoritos: []
 });
 
 var brunomodesto = new Usuario({
   nomeUsuario: "brunomodesto",
-  nome: "Bruno Modesto"
+  nome: "Bruno Modesto",
+  favoritos: []
 });
 
 var raissaresende = new Usuario({
   nomeUsuario: "raissaresende",
-  nome: "Raissa Resende"
+  nome: "Raissa Resende",
+  favoritos: []
 });
 
 var diogooliveira = new Usuario({
   nomeUsuario: "diogooliveira",
-  nome: "Diogo Oliveira"
+  nome: "Diogo Oliveira",
+  favoritos: []
 });
 
 var thulliozanetti = new Usuario({
   nomeUsuario: "thulliozanetti",
-  nome: "Thullio Zanetti"
+  nome: "Thullio Zanetti",
+  favoritos: []
 });
 
 var williampereira = new Usuario({
   nomeUsuario: "williampereira",
-  nome: "William Pereira"
+  nome: "William Pereira",
+  favoritos: []
 });
 
 var pedroprates = new Usuario({
   nomeUsuario: "pedroprates",
-  nome: "Pedro Henrique Prates"
+  nome: "Pedro Henrique Prates",
+  favoritos: []
 });
 
 var rafaelcanuto = new Usuario({
   nomeUsuario: "rafaelcanuto",
-  nome: "Rafael Canuto"
+  nome: "Rafael Canuto",
+  favoritos: []
 });
 
 var matheuspalhares = new Usuario({
   nomeUsuario: "matheuspalhares",
-  nome: "Matheus Palhares"
+  nome: "Matheus Palhares",
+  favoritos: []
 });
 
 var matheussilva = new Usuario({
   nomeUsuario: "matheussilva",
-  nome: "Matheus Silva"
+  nome: "Matheus Silva",
+  favoritos: []
 });
 
 var paulocirino = new Usuario({
   nomeUsuario: "paulocirino",
-  nome: "Paulo Cirino"
+  nome: "Paulo Cirino",
+  favoritos: []
 });
 
 var pedrovenancio = new Usuario({
   nomeUsuario: "pedrovenancio",
-  nome: "Pedro Vinicius Venancio"
+  nome: "Pedro Vinicius Venancio",
+  favoritos: []
 });
 
 var fabiofreitas = new Usuario({
   nomeUsuario: "fabiofreitas",
-  nome: "Fabio Luiz Freitas"
+  nome: "Fabio Luiz Freitas",
+  favoritos: []
 });
 
 var jandirneto = new Usuario({
   nomeUsuario: "jandirneto",
-  nome: "Jandir Neto"
+  nome: "Jandir Neto",
+  favoritos: []
 });
 
 var alanjunior = new Usuario({
   nomeUsuario: "alanjunior",
-  nome: "Alan Junior"
+  nome: "Alan Junior",
+  favoritos: []
 });
 
 var elsonsilva = new Usuario({
   nomeUsuario: "elsonsilva",
-  nome: "Elson Jose Silva"
+  nome: "Elson Jose Silva",
+  favoritos: []
 });
 
 var bernardocoutinho = new Usuario({
   nomeUsuario: "bernardocoutinho",
-  nome: "Bernardo Coutinho"
+  nome: "Bernardo Coutinho",
+  favoritos: []
 });
 
 // salva no DB
@@ -671,10 +696,10 @@ documento20.save();
 
 var disciplina1 = new Disciplina({
   codigo: "ELE084",
-  nome: "Laboratório de Projeto III",
+  nome: "LABORATÓRIO DE PROJETOS III",
   semestre: 7,
   comentarios: [coment1._id, coment2._id],
-  professores: ["Bruno Adorno"],
+  professores: ["José"],
   cargaHoraria: 60,
   dificuldade: 4,
   avaliacao: 4,

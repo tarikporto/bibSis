@@ -162,6 +162,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         addEventListener("redirect", (e) => {
           this._redirect(e.detail.page, e.detail.params);
         });
+
+        new BibsisService().BuscarUsuarioPorNomeUsuario("tarikporto").then((usuario) => {
+          BibsisUtil.localSave(BibsisUtil.constantes.LOGIN_DATA, usuario[0]);
+        });
       }
 
       _redirect(page, params) {
@@ -188,6 +192,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             null,
             this._showPage404.bind(this),
             true);
+
+        dispatchEvent(new CustomEvent("page.changed", {
+          detail: {
+            page: page
+          }
+        }));
       }
 
       _showPage404() {

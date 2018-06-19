@@ -120,7 +120,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         let idUsuario;
         if(BibsisUtil.localGet(BibsisUtil.constantes.LOGIN_DATA)) {
-          idUsuario = BibsisUtil.localGet(BibsisUtil.constantes.LOGIN_DATA).idUsuario;
+          idUsuario = BibsisUtil.localGet(BibsisUtil.constantes.LOGIN_DATA)._id;
           service.CriarComentario({
             titulo: this.formData.titulo,
             texto: this.formData.comentario,
@@ -130,23 +130,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             let disciplina = this.formData.disciplina;
             disciplina.comentarios.push(comentario._id);
             service.AtualizarDisciplina(disciplina);
-          });
-        } else {
-          service.BuscarUsuarioPorNomeUsuario("tarikporto").then((usuario) => {
-            idUsuario = usuario[0]._id;
-            service.CriarComentario({
-              titulo: this.formData.titulo,
-              texto: this.formData.comentario,
-              usuario_id: idUsuario,
-              avaliacao: this.$.rateDisplay.valor
-            }).then((comentario) => {
-              let disciplina = this.formData.disciplina;
-              disciplina.comentarios.push(comentario._id);
-              service.AtualizarDisciplina(disciplina);
-            });
+          }).then(() => {
+            BibsisUtil.redirect("materia",  { nomeDisciplina: this.formData.disciplina.nome })
           });
         }
-
 
       }
 

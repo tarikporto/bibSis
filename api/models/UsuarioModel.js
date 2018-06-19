@@ -7,7 +7,11 @@ var UsuarioSchema = new Schema({
     type: String,
     unique: true
   },
-  nome: String
+  nome: String,
+  favoritos: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Disciplina"
+  }]
 });
 
 module.exports = mongoose.model("Usuario", UsuarioSchema);
