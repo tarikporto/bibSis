@@ -8,7 +8,6 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
 
 <dom-module id="bibsis-home">
@@ -18,14 +17,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
         padding: 10px;
       }
+
       .container {
         display: flex;
         flex-direction: column;
         align-items: center;
       }
+
       .button-holder {
         margin: 16px;
       }
+
     </style>
 
     <div class="card container">
@@ -46,14 +48,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script>
     class BibsisHome extends Polymer.Element {
       static get is() { return 'bibsis-home'; }
+
       static get properties() {
         return {
+
         };
       }
+
       ready() {
         super.ready();
       }
     }
+
     window.customElements.define(BibsisHome.is, BibsisHome);
   </script>
 </dom-module>

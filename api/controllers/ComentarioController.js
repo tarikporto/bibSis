@@ -11,15 +11,6 @@ exports.buscarComentarios = function (req, res) {
   });
 };
 
-/*exports.buscarComentarioMaisRecente = function (req, res) {
-  Comentario.findOne(req.query).sort({data: -1}).exec(function(err, comentario) {
-    if(err)
-      res.send(err);
-    res.json(comentario);
-  });
-};*/
-
-
 exports.listarComentarios = function (req, res) {
   Comentario.find({}, function(err, comentario) {
     if(err)

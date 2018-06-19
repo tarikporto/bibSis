@@ -31,6 +31,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="lazy-import" href="bibsis-favoritos.html">
 <link rel="lazy-import" href="bibsis-grade.html">
 <link rel="lazy-import" href="bibsis-home.html">
+<link rel="lazy-import" href="my-view404.html">
+<link rel="lazy-import" href="bibsis-login.html">
 <link rel="lazy-import" href="bibsis-404.html">
 
 <link rel="import" href="bibsis-util.html">
@@ -82,6 +84,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <paper-button class="drawer-link" link><a name="home" href="[[rootPath]]home">Home</a></paper-button>
           <paper-button class="drawer-link" link><a name="grade" href="[[rootPath]]grade">Grade Curricular</a></paper-button>
           <paper-button class="drawer-link" link><a name="comentario" href="[[rootPath]]comentario">Criar Comentário</a></paper-button>
+          <paper-button class="drawer-link" link><a name="favoritos" href="[[rootPath]]favoritos">Favoritos</a></paper-button>
         </iron-selector>
       </app-drawer>
 
@@ -97,6 +100,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-button link on-tap="_homeLink">Home</paper-button>
                 <paper-button link on-tap="_gradeLink">Grade Curricular</paper-button>
                 <paper-button link on-tap="_comentarioLink">Criar Comentário</paper-button>
+                <paper-button link on-tap="_favoritosLink">Favoritos</paper-button>
               </div>
               <div class="login-data">
                 <template is="dom-if" if="[[]]">
@@ -193,6 +197,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       /* Event handlers */
       _homeLink () {
         BibsisUtil.redirect("home");
+      }
+
+      _favoritosLink () {
+        BibsisUtil.redirect("favoritos");
       }
 
       _gradeLink () {
