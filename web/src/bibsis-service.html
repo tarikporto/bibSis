@@ -7,6 +7,9 @@
       <iron-ajax id="buscarDisciplinasPorNome" url="{{url}}/disciplinas/query?nome=[[query.nome]]"
       handle-as="json" method="GET" content-type="application/json" headers="{{headers}}"></iron-ajax>
 
+      <iron-ajax id="buscarDisciplinasPorNomeParcial" url="{{url}}/disciplinas/queryParcial?nome=[[query.nome]]"
+      handle-as="json" method="GET" content-type="application/json" headers="{{headers}}"></iron-ajax>
+
       <iron-ajax id="criarDisciplina" url="{{url}}/disciplinas"
        handle-as="json" method="POST" content-type="application/json" headers="{{headers}}" body="{{request}}"></iron-ajax>
 
@@ -140,6 +143,17 @@
             BuscarDisciplinasPorNome (nome) {
                 this.set("query.nome", nome);
                 return this.ObterPromessa(this.$.buscarDisciplinasPorNome.generateRequest())
+                    .then((resposta) => {
+                        return resposta[0].response;
+                    })
+                    .catch(() => {
+                        this.MostrarMensagemErro("Erro");
+                    });
+            }
+
+            BuscarDisciplinasPorNomeParcial(nome) {
+                this.set("query.nome", nome);
+                return this.ObterPromessa(this.$.buscarDisciplinasPorNomeParcial.generateRequest())
                     .then((resposta) => {
                         return resposta[0].response;
                     })

@@ -11,6 +11,16 @@ exports.buscarDisciplinas = function (req, res) {
   });
 };
 
+exports.buscarDisciplinasPorNomeParcial = function (req, res) {
+  console.log("entrou 2");
+  Disciplina.find({ "nome": { '$regex' : String(req.query), '$options' : 'i' }}, function(err, disciplina) {
+    if(err)
+      res.send(err);
+    console.log(disciplina);
+    res.json(disciplina);
+  });
+};
+
 exports.listarDisciplinas = function (req, res) {
   Disciplina.find({}, function(err, disciplina) {
     if(err)

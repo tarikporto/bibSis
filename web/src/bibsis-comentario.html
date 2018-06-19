@@ -24,29 +24,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         display: block;
       }
-
       .input-box {
         padding: 8px 0;
       }
-
       .rate-box {
         display: flex;
         align-items: baseline;
         margin-top: 12px;
       }
-
       .rate-separator {
         margin: 0 8px;
       }
-
       .container{
         padding: 0px 10px;
       }
-
       paper-dropdown-menu {
         display: block;
       }
-
       .card {
         margin: 24px;
         padding: 16px;
@@ -56,7 +50,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
         min-height: 200px;
       }
-
     </style>
 
     <div class="card">
@@ -102,7 +95,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script>
     class BibsisComentario extends Polymer.Element {
       static get is() { return 'bibsis-comentario'; }
-
       static get properties() {
         return {
           formData: {
@@ -110,14 +102,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         };
       }
-
       ready() {
         super.ready();
       }
-
       _save() {
         let service = new BibsisService();
-
         let idUsuario;
         if(BibsisUtil.localGet(BibsisUtil.constantes.LOGIN_DATA)) {
           idUsuario = BibsisUtil.localGet(BibsisUtil.constantes.LOGIN_DATA)._id;
@@ -134,16 +123,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             BibsisUtil.redirect("materia",  { nomeDisciplina: this.formData.disciplina.nome })
           });
         }
-
       }
-
       _itemSelected(e) {
          var selectedItem = e.target.selectedItem;
          if (selectedItem) {
            this.formData.disciplina = selectedItem.value;
          }
        }
-
       static get properties() {
         return {
           disciplinas: {
@@ -160,25 +146,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
          },
         }
       }
-
       constructor () {
         super();
       }
-
-
-
       ready () {
         super.ready();
-
         new BibsisService().BuscarDisciplinas().then((resposta) => {
           if(resposta) {
             this.disciplinas = resposta;
           }
         });
-
       }
     }
-
     window.customElements.define(BibsisComentario.is, BibsisComentario);
   </script>
 </dom-module>

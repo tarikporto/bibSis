@@ -10,6 +10,9 @@ module.exports = function (app) {
   app.route("/disciplinas/query")
     .get(bibSis.buscarDisciplinas);
 
+  app.route("/disciplinas/queryParcial")
+    .get(bibSis.buscarDisciplinasPorNomeParcial);
+
   app.route("/disciplinas/:disciplinaId")
     .get(bibSis.lerDisciplina)
     .put(bibSis.editarDisciplina)
