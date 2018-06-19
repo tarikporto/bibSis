@@ -82,7 +82,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               Avaliação:
             </div>
             <div class="rate-separator">
-              <rate-display rate="3"></rate-display>
+              <rate-display id="rateDisplay" rate="3"></rate-display>
             </div>
           </div>
           <div class="input-box">
@@ -106,9 +106,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       static get properties() {
         return {
           formData: {
-            type: Object
+            type: Object,
           }
         };
+      }
+
+      ready() {
+        super.ready();
       }
 
       _save() {
@@ -117,22 +121,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         let idUsuario;
         if(BibsisUtil.localGet(BibsisUtil.constantes.LOGIN_DATA)) {
           idUsuario = BibsisUtil.localGet(BibsisUtil.constantes.LOGIN_DATA).idUsuario;
+          service.CriarComentario({
+            titulo: this.formData.titulo,
+            texto: this.formData.comentario,
+            usuario_id: idUsuario,
+            avaliacao: this.$.rateDisplay.valor
+          }).then((comentario) => {
+            let disciplina = this.formData.disciplina;
+            disciplina.comentarios.push(comentario._id);
+            service.AtualizarDisciplina(disciplina);
+          });
         } else {
           service.BuscarUsuarioPorNomeUsuario("tarikporto").then((usuario) => {
-            idUsuario = usuario._id;
+            idUsuario = usuario[0]._id;
+            service.CriarComentario({
+              titulo: this.formData.titulo,
+              texto: this.formData.comentario,
+              usuario_id: idUsuario,
+              avaliacao: this.$.rateDisplay.valor
+            }).then((comentario) => {
+              let disciplina = this.formData.disciplina;
+              disciplina.comentarios.push(comentario._id);
+              service.AtualizarDisciplina(disciplina);
+            });
           });
         }
 
-        service.CriarComentario({
-          titulo: this.formData.titulo,
-          texto: this.formData.comentario,
-          usuario_id: idUsuario,
-          avaliacao: this.formData.rate
-        }).then((comentario) => {
-          let disciplina = this.formData.disciplina;
-          disciplina.comentarios.push(comentario._id);
-          service.AtualizarDisciplina(disciplina);
-        });
+
       }
 
       _itemSelected(e) {
