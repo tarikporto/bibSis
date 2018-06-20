@@ -39,7 +39,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </p>
       <p>
         Não se esqueça de nos ajudar a crescer. Juntos somos mais fortes!</p>
-      <div class="button-holder"><paper-button primary raised>Inscreva-se ou faça Login</paper-button>
+      <div class="button-holder"><paper-button primary raised on-tap="_openLoginDialog">Inscreva-se ou faça Login</paper-button>
     </div>
   </template>
 
@@ -52,6 +52,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
       ready() {
         super.ready();
+      }
+
+      _openLoginDialog() {
+        dispatchEvent(new CustomEvent("open.login.dialog"));
       }
     }
     window.customElements.define(BibsisHome.is, BibsisHome);

@@ -1,0 +1,56 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+
+<dom-module id="login-panel">
+  <template>
+    <style include="shared-styles" is="custom-style">
+      :host {
+        display: block;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+      }
+
+      .hello-part {
+        margin: 0 8px;
+      }
+    </style>
+    <div class="container">
+      <div class="hello-part">
+        <h5>Olá [[nome]]</h5>
+      </div>
+      <paper-icon-button icon="bibsis-icons-materia:logout" on-tap="_deslogar"></paper-icon-button>
+    </div>
+  </template>
+  <script>
+    /**
+     * `testSilvana-element`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class LoginPanel extends Polymer.Element {
+      static get is() { return 'login-panel'; }
+      static get properties() {
+        return {
+          nome: {
+            type: String,
+            value: ""
+          }
+        };
+      }
+
+      _deslogar () {
+        dispatchEvent(new CustomEvent("deslogar"));
+      }
+
+    }
+
+    window.customElements.define(LoginPanel.is, LoginPanel);
+  </script>
+</dom-module>

@@ -3,7 +3,7 @@
 
 <dom-module id="login-dialog">
   <template>
-    <style>
+    <style include="shared-styles" is="custom-style">
       :host {
         display: block;
       }
@@ -28,17 +28,18 @@
     </style>
     <div class="container">
       <div class="text-holder">
-        <h2>Olá, faça seu login para ter acesso ao bibSis!</h2>
+        <h1>Olá, </h1>
+        <h2>faça seu login para ter acesso ao bibSis!</h2>
       </div>
       <div class="username-input-holder">
-        <paper-input label="Nome de Usuário"></paper-input>
+        <paper-input label="Nome de Usuário" value="{{username}}"></paper-input>
       </div>
       <div class="password-input-holder">
         <paper-input type="password" label="Senha"></paper-input>
       </div>
       <div class="buttons-holder">
-        <paper-button dialog-dismiss class="danger">Fechar</paper-button>
-        <paper-button>Login</paper-button>
+        <paper-button raised dialog-dismiss error>Fechar</paper-button>
+        <paper-button raised success on-tap="_doLogin">Login</paper-button>
       </div>
     </div>
   </template>
@@ -55,15 +56,27 @@
       static get is() { return 'login-dialog'; }
       static get properties() {
         return {
-          readOnly: {
-            type: Boolean,
-            value: false
+          username: {
+            type: String,
+            value: ""
           }
         };
       }
 
-      get valor () {
-        return this.rate;
+      _doLogin () {
+        if(this.username && this.username !== "") {
+          new BibsisService().BuscarUsuarioPorNomeUsuario(this.username).then((response) => {
+            if(response && response.length && response.length == 1) {
+              let usuario = response[0];
+              dispatchEvent(new CustomEvent("logar", {
+                detail: {
+                  usuario: usuario
+                }
+              }));
+              dispatchEvent(new CustomEvent("close.login.dialog"));
+            }
+          });
+        }
       }
     }
 

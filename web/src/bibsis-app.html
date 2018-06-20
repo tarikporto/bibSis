@@ -25,6 +25,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 
 <link rel="import" href="../custom_components/login-dialog/login-dialog.html">
+<link rel="import" href="../custom_components/login-panel/login-panel.html">
 
 <link rel="import" href="bibsis-icons.html">
 <link rel="import" href="bibsis-service.html">
@@ -68,7 +69,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .login-dialog {
         width: 400px;
-        height: 500px;
       }
     </style>
 
@@ -115,7 +115,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-button link on-tap="_favoritosLink">Favoritos</paper-button>
               </div>
               <div class="login-data">
-                  <paper-button link on-tap="openLoginDialog">Login</paper-button>
+                <template is="dom-if" if="[[loggedIn]]">
+                  <login-panel nome="[[usuarioLogado]]"></login-panel>
+                </template>
+                <template is="dom-if" if="[[!loggedIn]]">
+                  <paper-button link on-tap="_openLoginDialog">Login</paper-button>
+                </template>
               </div>
             </div>
           </app-toolbar>
@@ -157,7 +162,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           // This shouldn't be neccessary,T but the Analyzer isn't picking up
           // Polymer.Element#rootPath
           rootPath: String,
-          params: Object
+          params: Object,
+          loggedIn: {
+            type: Boolean,
+            value: false
+          },
+          usuarioLogado: {
+            type: String,
+            value: ""
+          }
         };
       }
 
@@ -173,9 +186,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this._redirect(e.detail.page, e.detail.params);
         });
 
-        new BibsisService().BuscarUsuarioPorNomeUsuario("tarikporto").then((usuario) => {
-          BibsisUtil.localSave(BibsisUtil.constantes.LOGIN_DATA, usuario[0]);
+        addEventListener("open.login.dialog", () => this._openLoginDialog());
+        addEventListener("logar", (e) => {
+          this._logar(e.detail.usuario);
         });
+        addEventListener("close.login.dialog", () => this._closeLoginDialog());
+        addEventListener("deslogar", () => this._deslogar());
       }
 
       _redirect(page, params) {
@@ -186,7 +202,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _routePageChanged(page) {
         // If no page was found in the route data, page will be an empty string.
         // Default to 'view1' in that case.
-        this.page = page || 'home';
+        if(!this.loggedIn) this.page = "home"
+        else {
+          this.page = page || 'home';
+        }
+
 
         // Close a non-persistent drawer when the page & route are changed.
         if (!this.$.drawer.persistent) {
@@ -231,8 +251,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         BibsisUtil.redirect("comentario");
       }
 
-      openLoginDialog () {
+      _logar(usuario) {
+        BibsisUtil.localSave(BibsisUtil.constantes.LOGIN_DATA, usuario);
+        this.set("loggedIn", true);
+        this.set("usuarioLogado", usuario.nome);
+      }
+
+      _deslogar() {
+        BibsisUtil.localDelete(BibsisUtil.constantes.LOGIN_DATA);
+        this.set("loggedIn", false);
+        this.set("usuarioLogado", "");
+        this._redirect("home");
+      }
+
+      _openLoginDialog () {
         this.$.loginDialog.open();
+      }
+      _closeLoginDialog () {
+        this.$.loginDialog.close();
       }
     }
 
