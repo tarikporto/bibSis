@@ -1,0 +1,74 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="lista-materiais">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      iron-icon {
+        cursor: pointer;
+      }
+    </style>
+    <div class="container">
+      <h1>Materiais</h1>
+      <template is="dom-repeat" items="[[materiais]]" as="material">
+        <div><paper-icon-button icon="bibsis-icons-materia:noticia"></paper-icon-button>Notícia 1</div>
+      </template>
+    </div>
+
+  </template>
+
+  <script>
+    /**
+     * `testSilvana-element`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class ListaMateriais extends Polymer.Element {
+      static get is() { return 'lista-materiais'; }
+      static get properties() {
+        return {
+          materiaisIds: {
+            type: Array,
+            value: [],
+            observer: "_getMateriais"
+          },
+          materiais: {
+            type: Array,
+            value: []
+          }
+        };
+      }
+
+      constructor() {
+        super();
+      }
+
+      ready() {
+        super.ready();
+      }
+
+      _getMateriais(materiaisIdsArray) {
+        let service = new BibsisService();
+
+        this.splice("materiaisIds", 0, this.materiaisIds.length);
+        if(materiaisIdsArray.length > 0) {
+          for(let id of this.materiaisIds) {
+            service.BuscarDocumentoPorId(id).then((material) => {
+              if(material) {
+                this.push("materiais", material);
+              }
+            })
+          }
+        }
+      }
+    }
+
+    window.customElements.define(ListaMateriais.is, ListaMateriais);
+  </script>
+</dom-module>

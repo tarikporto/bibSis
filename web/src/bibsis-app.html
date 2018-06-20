@@ -192,6 +192,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         });
         addEventListener("close.login.dialog", () => this._closeLoginDialog());
         addEventListener("deslogar", () => this._deslogar());
+
+        let usuarioLogado = BibsisUtil.localGet(BibsisUtil.constantes.LOGIN_DATA);
+        if(usuarioLogado) {
+          this._logar(usuarioLogado);
+        }
       }
 
       _redirect(page, params) {

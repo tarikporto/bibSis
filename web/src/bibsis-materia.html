@@ -12,6 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../custom_components/card-comentario/card-comentario.html">
+<link rel="import" href="../custom_components/lista-materiais/lista-materiais.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="bibsis-materia">
@@ -80,14 +81,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       </div>
       <div class="card" style="flex:1">
-        <h1>Materiais</h1>
-        <div><paper-icon-button icon="bibsis-icons-materia:noticia"></paper-icon-button>Notícia 1</div>
-        <div><paper-icon-button icon="bibsis-icons-materia:artigo"></paper-icon-button>Artigo 1</div>
-        <div><paper-icon-button icon="bibsis-icons-materia:imagem"></paper-icon-button>Imagem 1</div>
-        <div><paper-icon-button icon="bibsis-icons-materia:audio"></paper-icon-button>Áudio 1</div>
-          <div><paper-icon-button icon="bibsis-icons-materia:video"></paper-icon-button>Vídeo 1</div>
-        <div><paper-icon-button icon="bibsis-icons-materia:webpage"></paper-icon-button>Link 1</div>
-        <div><paper-icon-button icon="bibsis-icons-materia:livro"></paper-icon-button>Livro 1</div>
+        <lista-materiais materiais-ids="[[disciplina.documentos]]"></lista-materiais>
       </div>
     </div>
   </template>

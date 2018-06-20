@@ -19,6 +19,10 @@
       <iron-ajax id="atualizarDisciplina" url="{{url}}/disciplinas/[[query.id]]"
        handle-as="json" method="PUT" content-type="application/json" headers="{{headers}}" body="{{request}}"></iron-ajax>
 
+      <!-- DISCIPLINAS -->
+      <iron-ajax id="buscarDocumentoPorId" url="{{url}}/documentos/[[query.id]]"
+      handle-as="json" method="GET" content-type="application/json" headers="{{headers}}"></iron-ajax>
+
       <!-- COMENTARIOS -->
       <iron-ajax id="criarComentario" url="{{url}}/comentarios"
       handle-as="json" method="POST" content-type="application/json" headers="{{headers}}" body="{{request}}"></iron-ajax>
@@ -165,6 +169,17 @@
             BuscarDisciplinasPorId (id) {
                 this.set("query.id", id);
                 return this.ObterPromessa(this.$.buscarDisciplinasPorId.generateRequest())
+                    .then((resposta) => {
+                        return resposta[0].response;
+                    })
+                    .catch(() => {
+                        this.MostrarMensagemErro("Erro");
+                    });
+            }
+
+            BuscarDocumentoPorId (id) {
+                this.set("query.id", id);
+                return this.ObterPromessa(this.$.buscarDocumentoPorId.generateRequest())
                     .then((resposta) => {
                         return resposta[0].response;
                     })
