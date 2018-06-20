@@ -13,7 +13,7 @@ exports.buscarDisciplinas = function (req, res) {
 
 exports.buscarDisciplinasPorNomeParcial = function (req, res) {
   console.log("entrou 2");
-  Disciplina.find({ "nome": { '$regex' : String(req.query), '$options' : 'i' }}, function(err, disciplina) {
+  Disciplina.find({ "nome": { '$regex' : req.query.nome, '$options' : 'i' }}, function(err, disciplina) {
     if(err)
       res.send(err);
     console.log(disciplina);
