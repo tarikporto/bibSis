@@ -1,0 +1,72 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+<dom-module id="login-dialog">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .text-holder {
+        padding: 16px 0;
+      }
+
+      .username-input-holder {
+        padding: 16px 0;
+      }
+
+      .password-input-holder {
+        padding: 16px 0;
+      }
+
+      .buttons-holder {
+        padding: 16px 0;
+        display: flex;
+        justify-content: flex-end;
+      }
+    </style>
+    <div class="container">
+      <div class="text-holder">
+        <h2>Olá, faça seu login para ter acesso ao bibSis!</h2>
+      </div>
+      <div class="username-input-holder">
+        <paper-input label="Nome de Usuário"></paper-input>
+      </div>
+      <div class="password-input-holder">
+        <paper-input type="password" label="Senha"></paper-input>
+      </div>
+      <div class="buttons-holder">
+        <paper-button dialog-dismiss class="danger">Fechar</paper-button>
+        <paper-button>Login</paper-button>
+      </div>
+    </div>
+  </template>
+  <script>
+    /**
+     * `testSilvana-element`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class LoginDialog extends Polymer.Element {
+      static get is() { return 'login-dialog'; }
+      static get properties() {
+        return {
+          readOnly: {
+            type: Boolean,
+            value: false
+          }
+        };
+      }
+
+      get valor () {
+        return this.rate;
+      }
+    }
+
+    window.customElements.define(LoginDialog.is, LoginDialog);
+  </script>
+</dom-module>

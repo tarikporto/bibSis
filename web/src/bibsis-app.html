@@ -22,6 +22,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+
+<link rel="import" href="../custom_components/login-dialog/login-dialog.html">
 
 <link rel="import" href="bibsis-icons.html">
 <link rel="import" href="bibsis-service.html">
@@ -62,6 +65,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         width: 100%;
         align-items: baseline;
       }
+
+      .login-dialog {
+        width: 400px;
+        height: 500px;
+      }
     </style>
 
     <app-location
@@ -75,6 +83,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         data="{{routeData}}"
         tail="{{subroute}}">
     </app-route>
+
+    <paper-dialog class="login-dialog" id="loginDialog" modal>
+      <login-dialog></login-dialog>
+    </paper-dialog>
 
     <app-drawer-layout fullbleed narrow="{{narrow}}" force-narrow>
       <!-- Drawer content -->
@@ -103,9 +115,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-button link on-tap="_favoritosLink">Favoritos</paper-button>
               </div>
               <div class="login-data">
-                <template is="dom-if" if="[[]]">
-
-                </template>
+                  <paper-button link on-tap="openLoginDialog">Login</paper-button>
               </div>
             </div>
           </app-toolbar>
@@ -219,6 +229,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _comentarioLink () {
         BibsisUtil.redirect("comentario");
+      }
+
+      openLoginDialog () {
+        this.$.loginDialog.open();
       }
     }
 
